@@ -65,10 +65,18 @@ ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml
 
 ## Notes
 
-While, by default, the install process will not enable SSL, 
-the script can be configured to generate self-signed SSL certificates for the servers
-and enable secure HTTP. You can inject your own sertificates in the build process too. Should you choose
-to try the self-signed certificates, please be aware that you will get a number of trust warning in your
-web browser when you try to run the apps server. These can be resolved on a client-by-client basis
-by adding certificate exceptions in your browser. Before you even try the apps, you should probably load the
+By default, the install process will not enable SSL. To enable SSL for specific services, you can set the following variables to `true`:
+
+* `auth_server_secure_http`: Authorization server
+* `fhir_server_secure_http`: API server
+* `app_server_secure_http`: App server
+ 
+What cerificates will be used? You have two options:
+
+1. Set `use_custom_ssl_certificates: true` and `custom_ssl_certificate_path: /path/to/cert/dir`. For an example, see our [testing server settings](provisioning/ci-server.yml#L5). And for an example of what the directory layout should look like, [see here](provisioning/examples/certificates).
+
+2. If you set `use_custom_ssl_certificates: false`, the installer will geneate self-signed SSL certificates.
+Pleaase note that with self-signed certificates, you will get a number of trust warning in your
+web browser that can be resolved by adding certificate exceptions in your browser, or updating your CA list on
+a client by client basis. Before you even try the apps, you should probably load the
 API server and add the self-signed certificate to your browser's security exceptions.
