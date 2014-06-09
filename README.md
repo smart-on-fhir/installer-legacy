@@ -71,7 +71,7 @@ By default, the install process will not enable SSL. To enable SSL for specific 
 * `fhir_server_secure_http`: API server
 * `app_server_secure_http`: App server
  
-What cerificates will be used? You have two options:
+What certificates will be used? You have two options:
 
 1. Set `use_custom_ssl_certificates: true` and `custom_ssl_certificate_path: /path/to/cert/dir`. For an example, see our [testing server settings](provisioning/ci-server.yml#L5). And for an example of what the directory layout should look like, [see here](provisioning/examples/certificates).
 
