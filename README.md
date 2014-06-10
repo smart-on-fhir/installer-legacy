@@ -76,7 +76,7 @@ What certificates will be used? You have two options:
 1. Set `use_custom_ssl_certificates: true` and `custom_ssl_certificate_path: /path/to/cert/dir`. For an example, see our [testing server settings](provisioning/ci-server.yml#L5). And for an example of what the directory layout should look like, [see here](provisioning/examples/certificates).
 
 2. If you set `use_custom_ssl_certificates: false`, the installer will geneate self-signed SSL certificates.
-Pleaase note that with self-signed certificates, you will get a number of trust warning in your
+Please note that with self-signed certificates, you will get a number of trust warning in your
 web browser that can be resolved by adding certificate exceptions in your browser, or updating your CA list on
 a client by client basis. Before you even try the apps, you should probably load the
 API server and add the self-signed certificate to your browser's security exceptions.
