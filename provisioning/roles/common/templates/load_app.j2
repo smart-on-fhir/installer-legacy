@@ -2,8 +2,16 @@
   "clientId": "{{item.client_id}}",
   "clientName": "{{item.client_name}}",
   "logoUri": "{{item.logo_uri}}",
+{% if (item.launch_uri|default("null"))[:4] == "http" %}
+  "initiateLoginUri":"{{item.launch_uri|default("null")}}",
+{% else %}
   "initiateLoginUri":"{{app_server_base}}/{{item.launch_uri|default("null")}}",
+{% endif %}
+{% if item.redirect_uri[:4] == "http" %}
+  "redirectUris": ["{{item.redirect_uri}}"],
+{% else %}
   "redirectUris": ["{{app_server_base}}/{{item.redirect_uri}}"],
+{% endif %}
   "scope": [
     "launch",
     "user/*.*",
