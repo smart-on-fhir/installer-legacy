@@ -137,10 +137,12 @@
 - name: set ldap private key permissions
   tags: [ldap]
   when: ldap_server_tls
-  file: path=/etc/ldap/ssl/{{item}} group=ssl-cert mode=640
-  with_items:
-      - ldap01_slapd_key.pem
-      - ldap_ca_key.pem
+  file: path=/etc/ldap/ssl/ldap01_slapd_key.pem group=ssl-cert mode=640
+  
+- name: delete private key for certificate authority
+  tags: [ldap]
+  when: ldap_server_tls
+  file: path=/etc/ldap/ssl/ldap_ca_key.pem state=absent
 
 - name: restart ldap server
   tags: [ldap]
