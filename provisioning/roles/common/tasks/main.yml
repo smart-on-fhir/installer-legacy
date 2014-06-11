@@ -88,7 +88,11 @@
 - name: set private key permissions
   tags: [general]
   when: (auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and use_custom_ssl_certificates
-  file: path=/etc/nginx/ssl/*.key group=ssl-cert mode=640
+  file: path=/etc/nginx/ssl/{{item}} group=ssl-cert mode=640
+  with_items:
+      - apps.key
+      - auth.key
+      - fhir.key
         
 - name: clear truststore
   tags: [general]
