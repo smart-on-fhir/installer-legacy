@@ -149,7 +149,7 @@
 - name: import ldap ca certificate in truststore
   tags: [ldap]
   sudo_user: "{{username}}"
-  when: ldap_server_tls and not use_custom_ssl_certificates
+  when: ldap_server_tls
   shell: /bin/echo -e "{{keystore_password}}\nyes\n" | keytool
            -importcert -trustcacerts
            -file /etc/ldap/ssl/ldap_ca_cert.pem
@@ -158,7 +158,7 @@
   
 - name: import ldap certificate in truststore
   tags: [ldap]
-  when: ldap_server_tls and use_custom_ssl_certificates
+  when: ldap_server_tls
   shell: /bin/echo -e "{{keystore_password}}\nyes\n" | keytool
            -importcert -trustcacerts
            -alias ldap
