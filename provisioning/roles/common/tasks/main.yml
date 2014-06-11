@@ -80,6 +80,16 @@
   copy: src={{custom_ssl_certificates_path|default('examples/certificates')}}/
         dest=/etc/nginx/ssl
         
+- name: add www-data user to ssl-cert group
+  tags: [general]
+  when: (auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and use_custom_ssl_certificates
+  user: name=www-data groups=ssl-cert
+        
+- name: set private key permissions
+  tags: [general]
+  when: (auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and use_custom_ssl_certificates
+  file: path=/etc/ldap/ssl/*.key group=ssl-cert mode=640
+        
 - name: clear truststore
   tags: [general]
   file: name={{install_dir}}/keystore state=absent
