@@ -79,6 +79,8 @@
   when: (auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and use_custom_ssl_certificates
   copy: src={{custom_ssl_certificates_path|default('examples/certificates')}}/
         dest=/etc/nginx/ssl
+  notify:
+        - restart nginx
         
 - name: add www-data user to ssl-cert group
   tags: [general]
