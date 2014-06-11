@@ -75,7 +75,7 @@
          
 - name: import fhir server certificate in truststore
   tags: [smart_on_fhir]
-  when: fhir_server_secure_http and not use_custom_ssl_certificates
+  when: fhir_server_secure_http
   shell: /bin/echo -e "{{keystore_password}}\nyes\n" | keytool
            -importcert -trustcacerts
            -alias fhir

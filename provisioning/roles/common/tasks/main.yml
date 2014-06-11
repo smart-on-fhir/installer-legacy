@@ -106,7 +106,7 @@
 - name: initialize truststore
   tags: [general]
   sudo_user: "{{username}}"
-  when: (ldap_server_tls or auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and not use_custom_ssl_certificates
+  when: ldap_server_tls or auth_server_secure_http or fhir_server_secure_http or app_server_secure_http
   shell: /bin/echo -e "{{keystore_password}}\n{{keystore_password}}\n\n\n\n\n\n\nyes\n" | keytool
            -genkey -alias foo
            -keystore {{install_dir}}/keystore

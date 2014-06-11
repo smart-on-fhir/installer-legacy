@@ -96,7 +96,7 @@
          
 - name: import auth server certificate in truststore
   tags: [auth]
-  when: auth_server_secure_http and not use_custom_ssl_certificates
+  when: auth_server_secure_http
   shell: /bin/echo -e "{{keystore_password}}\nyes\n" | keytool
            -importcert -trustcacerts
            -alias auth
