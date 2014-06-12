@@ -34,6 +34,10 @@ keystore_password: "changeme"
 use_custom_ssl_certificates: false
 #custom_ssl_certificates_path: examples/certificates
 
+# Controls whether HTTP requests on port 80 will be
+# redirected to the server's base URLs
+http_redirect: true
+
 # General settings for the SMART-on-FHIR server (override as needed)
 fhir_server_secure_http: false
 fhir_server_host: "localhost"
