@@ -22,7 +22,7 @@ script
        -Dldap.base="ou=People,{{ldap_server_base}}" \
        -Djetty.port="4000" \
        -Djetty.host="localhost" \
-{% if (ldap_server_tls or fhir_server_secure_http) and not use_custom_ssl_certificates %}
+{% if ldap_server_tls or fhir_server_secure_http %}
        -Djavax.net.ssl.trustStore="{{install_dir}}/keystore" \
        -Djavax.net.ssl.trustStorePassword="{{keystore_password}}" \
 {% endif %}
