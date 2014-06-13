@@ -1,6 +1,6 @@
 - name: configure auth server service
   tags: [auth]
-  template: src=auth.conf.j2
+  template: src=auth-server.conf.j2
             dest=/etc/init/auth.conf
             owner=root group=root mode=0644
   register: auth_service
@@ -24,7 +24,7 @@
 - name: stop auth server
   tags: [auth]
   when: (auth_checkout.changed or auth_ldap_checkout.changed) or force_rebuild
-  service: name=auth state=stopped
+  service: name=auth-server state=stopped
 
 - name: clear auth server data
   tags: [auth]
@@ -82,7 +82,7 @@
 - name: restart auth server
   tags: [auth]
   when: auth_checkout.changed or auth_service.changed or auth_ldap_checkout.changed or force_rebuild
-  service: name=auth state=restarted
+  service: name=auth-server state=restarted
 
 - name: wait for auth server to become available
   tags: [auth]

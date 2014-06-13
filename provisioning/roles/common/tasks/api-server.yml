@@ -17,33 +17,33 @@
           password={{postgres_password}}
           role_attr_flags=SUPERUSER
           
-- name: configure smart-on-fhir service
+- name: configure api server service
   tags: [smart_on_fhir]
-  template: src=smart-on-fhir.conf.j2
-            dest=/etc/init/smart-on-fhir.conf
+  template: src=api-server.conf.j2
+            dest=/etc/init/api-server.conf
             owner=root group=root mode=0644
   register: sof_service
 
-- name: checkout smart-on-fhir
+- name: checkout api server
   tags: [smart_on_fhir]
   sudo_user: "{{username}}"
   git: repo={{fhir_server_repo}}
        version={{fhir_server_branch}}
-       dest={{install_dir}}/smart-on-fhir
+       dest={{install_dir}}/api-server
   register: sof_checkout
 
-- name: stop smart-on-fhir
+- name: stop api server
   tags: [smart_on_fhir]
   when: sof_checkout.changed or force_rebuild
-  service: name=smart-on-fhir state=stopped
+  service: name=api-server state=stopped
   
-- name: build smart-on-fhir server
+- name: build api server
   tags: [smart_on_fhir]
   sudo_user: "{{username}}"
   environment:
     JAVA_HOME: "{{java_home_dir}}"
   when: sof_checkout.changed or force_rebuild
-  shell: chdir={{install_dir}}/smart-on-fhir
+  shell: chdir={{install_dir}}/api-server
         ./grailsw dev war
 
 - name: drop postgres db
@@ -58,12 +58,12 @@
   when: sof_checkout.changed or force_rebuild
   postgresql_db: name=fhir owner={{postgres_user}}
 
-- name: restart smart-on-fhir
+- name: restart api server
   tags: [smart_on_fhir]
   when: (sof_checkout.changed or sof_service.changed) or force_rebuild
-  service: name=smart-on-fhir state=restarted
+  service: name=api-server state=restarted
  
-- name: wait for smart-on-fhir server to become available
+- name: wait for api server to become available
   tags: [smart_on_fhir]
   wait_for: port=3000
   
@@ -82,7 +82,7 @@
            -file /etc/nginx/ssl/fhir.crt
            -keystore {{install_dir}}/keystore
    
-- name: configure nginx (smart-on-fhir server)
+- name: configure nginx (api server)
   tags: [smart_on_fhir,nginx]
   template: src=nginx_default.j2 dest=/etc/nginx/sites-enabled/default owner=root group=root mode=0644
   notify:

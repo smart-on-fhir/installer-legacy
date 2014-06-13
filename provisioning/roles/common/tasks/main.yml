@@ -122,6 +122,6 @@
         - restart nginx
  
 - include: ldap.yml
-- include: smart-on-fhir.yml
+- include: api-server.yml
 - include: auth-server.yml
 - include: sample-data.yml

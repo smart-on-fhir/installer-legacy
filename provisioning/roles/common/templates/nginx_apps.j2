@@ -6,7 +6,7 @@ server {
     listen {{app_server_port}};
 
     location / {
-       root {{install_dir}}/fhir-starter/static;
+       root {{install_dir}}/apps/static;
     }
 
 {% if app_server_secure_http %}

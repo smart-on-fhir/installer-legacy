@@ -30,22 +30,22 @@
            --data-binary @{{item}}"
   with_items: sample_patient_files.stdout_lines
 
-- name: checkout fhir-starter apps
+- name: checkout sample apps
   tags: [apps]
   sudo_user: "{{username}}"
   git: repo={{app_server_repo}}
        version={{app_server_branch}}
-       dest={{install_dir}}/fhir-starter
+       dest={{install_dir}}/apps
   register: apps_checkout
 
-- name: configure fhir-starter
+- name: configure sample apps server
   tags: [apps]
   sudo_user: "{{username}}"
-  shell: sed -i -e 's/http:\/\/localhost:9080/{{ fhir_server_base | regex_replace('/', '\\/') }}/' {{install_dir}}/fhir-starter/static/fhirStarter/services.js
+  shell: sed -i -e 's/http:\/\/localhost:9080/{{ fhir_server_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/static/fhirStarter/services.js
 
 - name: list sample apps
   tags: [apps, load_apps]
-  shell: cat {{install_dir}}/fhir-starter/static/fhirStarter/apps.json
+  shell: cat {{install_dir}}/apps/static/fhirStarter/apps.json
   register: sample_apps
 
 - name: copy load-app script
@@ -69,7 +69,7 @@
   shell: creates=/etc/nginx/ssl/apps.crt
          /bin/echo -e "{{app_server_ssl_country}}\n{{app_server_ssl_province}}\n{{app_server_ssl_locality}}\n{{app_server_ssl_organization}}\n{{app_server_ssl_division}}\n{{app_server_host}}\n{{app_server_ssl_email}}\n" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/apps.key -out /etc/nginx/ssl/apps.crt
 
-- name: configure nginx (fhir-starter apps)
+- name: configure nginx (sample apps)
   tags: [apps,nginx]
   template: src=nginx_apps.j2 dest=/etc/nginx/sites-enabled/apps owner=root group=root mode=0644
   notify:

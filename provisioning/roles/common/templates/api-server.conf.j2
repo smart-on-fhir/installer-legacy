@@ -20,7 +20,7 @@ env TOKEN_URI={{fhir_server_token_uri|default('')}}
 env JAVA_HOME={{java_home_dir}}
 
 script
-    chdir {{install_dir}}/smart-on-fhir/target
+    chdir {{install_dir}}/api-server/target
     java \
        -Djetty.port="3000" \
        -Djetty.host="localhost" \
