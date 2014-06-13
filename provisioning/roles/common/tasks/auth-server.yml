@@ -1,7 +1,7 @@
 - name: configure auth server service
   tags: [auth]
   template: src=auth-server.conf.j2
-            dest=/etc/init/auth.conf
+            dest=/etc/init/auth-server.conf
             owner=root group=root mode=0644
   register: auth_service
 
