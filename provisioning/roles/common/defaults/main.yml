@@ -44,7 +44,7 @@ fhir_server_host: "localhost"
 fhir_server_port: 9080
 fhir_server_username: client
 fhir_server_password: secret
-fhir_server_repo: "https://github.com/smart-on-fhir/smart-on-fhir.git"
+fhir_server_repo: "https://github.com/smart-on-fhir/api-server.git"
 fhir_server_branch: "master"
 
 # Specific settings for the SMART-on-FHIR server authorization behavior
@@ -61,7 +61,7 @@ fhir_server_preserve_db: false
 app_server_secure_http: false
 app_server_host: "localhost"
 app_server_port: 9090
-app_server_repo: "https://github.com/smart-on-fhir/fhir-starter.git"
+app_server_repo: "https://github.com/smart-on-fhir/apps.git"
 app_server_branch: "gh-pages"
 
 # General settings for the authorization server
@@ -70,9 +70,9 @@ auth_server_host: "localhost"
 auth_server_port: 9085
 auth_server_username: client
 auth_server_password: secret
-auth_server_repo: "https://github.com/smart-on-fhir/OpenID-Connect-Java-Spring-Server.git"
+auth_server_repo: "https://github.com/smart-on-fhir/auth-server.git"
 auth_server_branch: "smart-launch"
-auth_ldap_server_repo: "https://github.com/smart-on-fhir/ldap-openid-connect-server.git"
+auth_ldap_server_repo: "https://github.com/smart-on-fhir/auth-server-ldap.git"
 auth_ldap_server_branch: "smart-launch"
 auth_server_war: ldap-openid-connect-server/ldap-server-overlay/target/ldap-openid-connect-server.war
 auth_server_data_context: "{{install_dir}}/openid-connect-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/data-context.xml"
@@ -93,7 +93,7 @@ ldap_server_admin_password: "sample-password"
 ldap_server_tls: false
 
 # General settings for the sample patients set
-sample_patients_repo: "https://github.com/chb/smart_sample_patients.git"
+sample_patients_repo: "https://github.com/smart-on-fhir/sample-patients.git"
 sample_patients_branch: "fhir"
 
 # choose how many sample patients to load in the server or set to 9999 for all of them

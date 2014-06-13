@@ -11,8 +11,8 @@ Once you have Virtualbox and Vagrant installed on your machine, you can:
 
 ```
 vagrant plugin install vagrant-vbguest
-git clone https://github.com/smart-on-fhir/smart-on-fhir-installer/
-cd smart-on-fhir-installer
+git clone https://github.com/smart-on-fhir/installer
+cd installer
 vagrant up
 ```
 
@@ -48,8 +48,8 @@ vagrant halt
 apt-get update
 apt-get install curl git python-pycurl python-pip python-yaml python-paramiko python-jinja2
 pip install ansible==1.6
-git clone https://github.com/smart-on-fhir/smart-on-fhir-installer
-cd smart-on-fhir-installer/provisioning
+git clone https://github.com/smart-on-fhir/installer
+cd installer/provisioning
 ```
 
 At this point, you probably want to edit `custom_settings.yml` or pass a
