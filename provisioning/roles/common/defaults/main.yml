@@ -74,7 +74,7 @@ auth_server_repo: "https://github.com/smart-on-fhir/auth-server.git"
 auth_server_branch: "smart-launch"
 auth_ldap_server_repo: "https://github.com/smart-on-fhir/auth-server-ldap.git"
 auth_ldap_server_branch: "smart-launch"
-auth_server_war: auth-server-ldap/ldap-server-overlay/target/auth-server-ldap.war
+auth_server_war: auth-server-ldap/ldap-server-overlay/target/ldap-openid-connect-server.war
 auth_server_data_context: "{{install_dir}}/auth-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/data-context.xml"
 auth_server_db_file: "{{install_dir}}/auth_server_db.hsql"
 
