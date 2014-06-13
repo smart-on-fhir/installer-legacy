@@ -10,7 +10,7 @@
   sudo_user: "{{username}}"
   git: repo={{auth_server_repo}}
        version={{auth_server_branch}}
-       dest={{install_dir}}/openid-connect-server
+       dest={{install_dir}}/auth-server
   register: auth_checkout
   
 - name: checkout auth ldap server
@@ -18,7 +18,7 @@
   sudo_user: "{{username}}"
   git: repo={{auth_ldap_server_repo}}
        version={{auth_ldap_server_branch}}
-       dest={{install_dir}}/ldap-openid-connect-server
+       dest={{install_dir}}/auth-server-ldap
   register: auth_ldap_checkout
   
 - name: stop auth server
@@ -53,20 +53,20 @@
   when: auth_checkout.changed or force_rebuild
   environment:
     JAVA_HOME: "{{java_home_dir}}"
-  shell: chdir={{install_dir}}/openid-connect-server
+  shell: chdir={{install_dir}}/auth-server
        mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true
        
 - name: configure auth ldap overlay for no-tls authentication 1 (if needed)
   tags: [auth]
   when: not ldap_server_tls
-  lineinfile: dest={{install_dir}}/ldap-openid-connect-server/ldap-server-overlay/src/main/webapp/WEB-INF/user-context.xml
+  lineinfile: dest={{install_dir}}/auth-server-ldap/ldap-server-overlay/src/main/webapp/WEB-INF/user-context.xml
               state=absent
               regexp='authenticationStrategy'
 
 - name: configure auth ldap overlay for no-tls authentication 2 (if needed)
   tags: [auth]
   when: not ldap_server_tls
-  lineinfile: dest={{install_dir}}/ldap-openid-connect-server/ldap-server-overlay/src/main/webapp/WEB-INF/user-context.xml
+  lineinfile: dest={{install_dir}}/auth-server-ldap/ldap-server-overlay/src/main/webapp/WEB-INF/user-context.xml
               state=absent
               regexp='authenticationSource'
 
@@ -76,7 +76,7 @@
   when: auth_ldap_checkout.changed or force_rebuild
   environment:
     JAVA_HOME: "{{java_home_dir}}"
-  shell: chdir={{install_dir}}/ldap-openid-connect-server
+  shell: chdir={{install_dir}}/auth-server-ldap
        mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true
 
 - name: restart auth server
