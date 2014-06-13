@@ -3,18 +3,18 @@
   sudo_user: "{{username}}"
   git: repo={{sample_patients_repo}}
        version={{sample_patients_branch}}
-       dest={{install_dir}}/smart_sample_patients
+       dest={{install_dir}}/sample-patients
   register: sample_patients_checkout
 
 - name: build sample patients
   tags: [patients]
   sudo_user: "{{username}}"
-  shell: chdir={{install_dir}}/smart_sample_patients/bin
+  shell: chdir={{install_dir}}/sample-patients/bin
          python generate.py --write-fhir ../generated-data
 
 - name: list sample patients
   tags: [patients, load_patients]
-  shell: ls {{install_dir}}/smart_sample_patients/generated-data/*.xml | head -n {{sample_patients_limit}}
+  shell: ls {{install_dir}}/sample-patients/generated-data/*.xml | head -n {{sample_patients_limit}}
   register: sample_patient_files
 
 - name: load sample patients
@@ -22,7 +22,7 @@
   when: 
     ((sof_checkout.changed or sample_patients_checkout.changed) or force_rebuild)
     and (not fhir_server_preserve_db)
-  shell: "chdir={{install_dir}}/smart_sample_patients/generated-data/
+  shell: "chdir={{install_dir}}/sample-patients/generated-data/
          curl
            -u {{fhir_server_username}}:{{fhir_server_password}}
            'http://localhost:3000/?'
