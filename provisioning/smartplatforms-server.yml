@@ -1,0 +1,23 @@
+---
+keystore_password: "SUPERSECRET1"
+username: "fhir"
+userpass: "SUPERSECRET2"
+auth_server_host: "authorize.smartplatforms.org"
+fhir_server_host: "fhir-api.smartplatforms.org"
+app_server_host: "fhir.smartplatforms.org"
+fhir_server_secure_http: true
+app_server_secure_http: true
+auth_server_secure_http: true
+ldap_server_tls: true
+fhir_server_port: 443
+app_server_port: 443
+auth_server_port: 443
+sample_patients_limit: 9999
+ldap_server_domain: "smartplatforms.org"
+ldap_server_host: "ldap.smartplatforms.org"
+ldap_server_base: "dc=smartplatforms,dc=org"
+ldap_server_uri: "ldap://{{ldap_server_host}}:389"
+ldap_server_organization: "SMART Platforms"
+ldap_server_admin_password: "SUPERSECRET3"
+use_custom_ssl_certificates: true
+custom_ssl_certificates_path: ../../certificates
