@@ -104,7 +104,7 @@
 - name: copy custom ldap ssl certificates
   tags: [ldap]
   when: ldap_server_tls and use_custom_ssl_certificates
-  copy: src={{custom_ssl_certificates_path|default('examples/certificates')}}/ldap/
+  copy: src={{custom_ssl_certificates_path}}/ldap/
         dest=/etc/ldap/ssl
 
 - name: copy ldap config files

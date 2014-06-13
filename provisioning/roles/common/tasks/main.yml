@@ -2,6 +2,10 @@
   tags: [general]
   fail: msg="each server must have unique host:port assigned"
   when: "'{{auth_server_host}}:{{auth_server_port}}' == '{{fhir_server_host}}:{{fhir_server_port}}' or '{{auth_server_host}}:{{auth_server_port}}' == '{{app_server_host}}:{{app_server_port}}' or '{{fhir_server_host}}:{{fhir_server_port}}' == '{{app_server_host}}:{{app_server_port}}'"
+  
+- name: check custom certificate preconditions
+  fail: msg="please define the path to the custom certificates that you would like to use"
+  when: use_custom_ssl_certificates and (custom_ssl_certificates_path is not defined)
 
 - name: install prerequisite packages
   tags: [general]
@@ -77,7 +81,7 @@
 - name: copy custom ssl certificates
   tags: [general]
   when: (auth_server_secure_http or fhir_server_secure_http or app_server_secure_http) and use_custom_ssl_certificates
-  copy: src={{custom_ssl_certificates_path|default('examples/certificates')}}/
+  copy: src={{custom_ssl_certificates_path}}/
         dest=/etc/nginx/ssl
   notify:
         - restart nginx
