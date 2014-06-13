@@ -73,7 +73,7 @@
 - name: build auth ldap overlay
   tags: [auth]
   sudo_user: "{{username}}"
-  when: auth_ldap_checkout.changed or force_rebuild
+  when: (auth_checkout.changed or auth_ldap_checkout.changed) or force_rebuild
   environment:
     JAVA_HOME: "{{java_home_dir}}"
   shell: chdir={{install_dir}}/auth-server-ldap
