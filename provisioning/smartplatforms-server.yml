@@ -21,3 +21,8 @@ ldap_server_organization: "SMART Platforms"
 ldap_server_admin_password: "SUPERSECRET3"
 use_custom_ssl_certificates: true
 custom_ssl_certificates_path: ../../certificates
+fhir_server_branch: "master"
+app_server_branch: "gh-pages"
+auth_server_branch: "smart-launch"
+auth_ldap_server_branch: "smart-launch"
+sample_patients_branch: "fhir"

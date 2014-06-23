@@ -12,6 +12,9 @@ username: fhir
 userpass: secretpass
 install_dir: "/home/{{username}}"
 
+# The version of SMART-on-FHIR to install
+smart_on_fhir_version: "0.0.1"
+
 # Suppresses selective task execution (set this to true if you would like to
 # force the playbook to always rebuild the servers and reload them)
 force_rebuild: false
@@ -45,7 +48,7 @@ fhir_server_port: 9080
 fhir_server_username: client
 fhir_server_password: secret
 fhir_server_repo: "https://github.com/smart-on-fhir/api-server.git"
-fhir_server_branch: "master"
+fhir_server_branch: "v{{smart_on_fhir_version}}"
 
 # Specific settings for the SMART-on-FHIR server authorization behavior
 fhir_server_use_auth: true
@@ -62,7 +65,7 @@ app_server_secure_http: false
 app_server_host: "localhost"
 app_server_port: 9090
 app_server_repo: "https://github.com/smart-on-fhir/apps.git"
-app_server_branch: "gh-pages"
+app_server_branch: "v{{smart_on_fhir_version}}"
 
 # General settings for the authorization server
 auth_server_secure_http: false
@@ -71,9 +74,9 @@ auth_server_port: 9085
 auth_server_username: client
 auth_server_password: secret
 auth_server_repo: "https://github.com/smart-on-fhir/auth-server.git"
-auth_server_branch: "smart-launch"
+auth_server_branch: "f{{smart_on_fhir_version}}"
 auth_ldap_server_repo: "https://github.com/smart-on-fhir/auth-server-ldap.git"
-auth_ldap_server_branch: "smart-launch"
+auth_ldap_server_branch: "f{{smart_on_fhir_version}}"
 auth_server_war: auth-server-ldap/ldap-server-overlay/target/ldap-openid-connect-server.war
 auth_server_data_context: "{{install_dir}}/auth-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/data-context.xml"
 auth_server_db_file: "{{install_dir}}/auth_server_db.hsql"
@@ -94,7 +97,7 @@ ldap_server_tls: false
 
 # General settings for the sample patients set
 sample_patients_repo: "https://github.com/smart-on-fhir/sample-patients.git"
-sample_patients_branch: "fhir"
+sample_patients_branch: "f{{smart_on_fhir_version}}"
 
 # choose how many sample patients to load in the server or set to 9999 for all of them
 sample_patients_limit: 10
