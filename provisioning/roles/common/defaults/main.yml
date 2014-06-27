@@ -97,7 +97,7 @@ ldap_server_tls: false
 
 # General settings for the sample patients set
 sample_patients_repo: "https://github.com/smart-on-fhir/sample-patients.git"
-sample_patients_branch: "f{{smart_on_fhir_version}}"
+sample_patients_branch: "v{{smart_on_fhir_version}}"
 
 # choose how many sample patients to load in the server or set to 9999 for all of them
 sample_patients_limit: 10
