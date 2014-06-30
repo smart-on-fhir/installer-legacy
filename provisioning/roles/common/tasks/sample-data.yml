@@ -24,7 +24,7 @@
     and (not fhir_server_preserve_db)
   shell: "chdir={{install_dir}}/sample-patients/generated-data/
          curl
-           -u {{fhir_server_username}}:{{fhir_server_password}}
+           -u {{fhir_server_client}}:{{fhir_server_password}}
            'http://localhost:3000/?'
            -H 'Content-Type: text/xml' 
            --data-binary @{{item}}"
@@ -58,7 +58,7 @@
      ./load_sample_app.py
          '{{lookup('template', '../templates/load_app.j2')}}'
          '{{auth_server_base}}'
-         '{{auth_server_username}}'
+         '{{auth_server_client}}'
          '{{auth_server_password}}'
   with_flattened: 
     - "{{ sample_apps.stdout | to_json }}"

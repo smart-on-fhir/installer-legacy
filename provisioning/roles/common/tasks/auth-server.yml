@@ -47,6 +47,18 @@
    regexp="hsqldb:file"
    line='<property name="url" value="jdbc:hsqldb:file:{{auth_server_db_file}};sql.syntax_mys=true" />'
 
+- name: configure auth server client
+  tags: [auth]
+  replace: dest={{install_dir}}/auth-server/openid-connect-server-webapp/src/main/resources/db/clients.sql
+           regexp="\\'client\\'"
+           replace="'{{auth_server_client}}'"
+             
+- name: configure auth server client secret
+  tags: [auth]
+  replace: dest={{install_dir}}/auth-server/openid-connect-server-webapp/src/main/resources/db/clients.sql
+           regexp="\'secret\'"
+           replace="'{{auth_server_password}}'"
+
 - name: build auth server
   tags: [auth]
   sudo_user: "{{username}}"

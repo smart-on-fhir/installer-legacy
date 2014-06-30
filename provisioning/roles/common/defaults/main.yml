@@ -45,7 +45,7 @@ http_redirect: true
 fhir_server_secure_http: false
 fhir_server_host: "localhost"
 fhir_server_port: 9080
-fhir_server_username: client
+fhir_server_client: client
 fhir_server_password: secret
 fhir_server_repo: "https://github.com/smart-on-fhir/api-server.git"
 fhir_server_branch: "v{{smart_on_fhir_version}}"
@@ -71,7 +71,7 @@ app_server_branch: "v{{smart_on_fhir_version}}"
 auth_server_secure_http: false
 auth_server_host: "localhost"
 auth_server_port: 9085
-auth_server_username: client
+auth_server_client: client
 auth_server_password: secret
 auth_server_repo: "https://github.com/smart-on-fhir/auth-server.git"
 auth_server_branch: "f{{smart_on_fhir_version}}"
