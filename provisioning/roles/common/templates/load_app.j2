@@ -7,7 +7,7 @@
 {% else %}
   "initiateLoginUri":"{{app_server_base}}/{{item.launch_uri|default("null")}}",
 {% endif %}
-{% if item.redirect_uri[:4] == "http" %}
+{% if item.redirect_uri[:4] == "http" or item.redirect_uri[:11] == "smartapp://" %}
   "redirectUris": ["{{item.redirect_uri}}"],
 {% else %}
   "redirectUris": ["{{app_server_base}}/{{item.redirect_uri}}"],
