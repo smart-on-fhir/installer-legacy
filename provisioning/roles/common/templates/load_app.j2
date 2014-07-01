@@ -20,6 +20,9 @@
     "openid",
     "address",
     "email"
+{% if item.redirect_uri[:11] == "smartapp://" %}
+    ,"search","launch/patient","profile"
+{% endif %}
   ],
   "clientDescription": null,
   "tokenEndpointAuthMethod": "NONE",
