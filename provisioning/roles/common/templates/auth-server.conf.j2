@@ -17,6 +17,8 @@ script
        -DBASE_URL="{{auth_server_base}}/" \
        -DCONTEXT_FHIR_ENDPOINT="{{fhir_server_base}}"\
        -DCONTEXT_RESOLVE_ENDPOINT="{{app_server_base}}"\
+       -DCONTEXT_USERNAME="{{fhir_server_client}}"\
+       -DCONTEXT_PASSWORD="{{fhir_server_password}}"\
        -Dldap.server="{{ldap_server_uri}}" \
        -Dldap.url="{{ldap_server_uri}}" \
        -Dldap.base="ou=People,{{ldap_server_base}}" \
