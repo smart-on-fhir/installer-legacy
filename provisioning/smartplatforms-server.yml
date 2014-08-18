@@ -24,7 +24,7 @@ ldap_server_organization: "SMART Platforms"
 use_custom_ssl_certificates: true
 custom_ssl_certificates_path: ../../certificates
 fhir_server_branch: "master"
-app_server_branch: "gh-pages"
+app_server_branch: "master"
 auth_ldap_server_branch: "smart-launch"
 sample_patients_branch: "master"
 auth_server_branch: "self-service"
