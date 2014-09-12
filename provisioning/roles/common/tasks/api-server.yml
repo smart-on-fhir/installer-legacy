@@ -5,7 +5,7 @@
   register: postgres_conf
 
 - name: restart postgres
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   when: postgres_conf.changed or force_rebuild
   service: name=postgresql state=restarted
 
@@ -47,13 +47,13 @@
         ./grailsw dev war
 
 - name: drop postgres db
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   sudo_user: postgres
   when: (sof_checkout.changed or force_rebuild) and (not fhir_server_preserve_db)
   postgresql_db: state=absent name=fhir
           
 - name: create postgres db
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   sudo_user: postgres
   when: sof_checkout.changed or force_rebuild
   postgresql_db: name=fhir owner={{postgres_user}}
