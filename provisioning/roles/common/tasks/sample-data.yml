@@ -1,5 +1,5 @@
 - name: checkout sample patients
-  tags: [patients]
+  tags: [patients, load_patients]
   sudo_user: "{{username}}"
   git: repo={{sample_patients_repo}}
        version={{sample_patients_branch}}

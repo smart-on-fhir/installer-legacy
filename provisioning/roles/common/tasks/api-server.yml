@@ -1,5 +1,5 @@
 - name: configure postgres
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   copy: src=pg_hba.conf
         dest=/etc/postgresql/9.3/main/pg_hba.conf
   register: postgres_conf
@@ -18,14 +18,14 @@
           role_attr_flags=SUPERUSER
           
 - name: configure api server service
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   template: src=api-server.conf.j2
             dest=/etc/init/api-server.conf
             owner=root group=root mode=0644
   register: sof_service
 
 - name: checkout api server
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   sudo_user: "{{username}}"
   git: repo={{fhir_server_repo}}
        version={{fhir_server_branch}}
@@ -59,12 +59,12 @@
   postgresql_db: name=fhir owner={{postgres_user}}
 
 - name: restart api server
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   when: (sof_checkout.changed or sof_service.changed) or force_rebuild
   service: name=api-server state=restarted
  
 - name: wait for api server to become available
-  tags: [smart_on_fhir]
+  tags: [smart_on_fhir, reset_db]
   wait_for: port=3000
   
 - name: generate self-signed ssl certificate (fhir server)
