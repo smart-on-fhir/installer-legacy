@@ -7,6 +7,8 @@ are (we have tested with the versions below, but other versions may be fine too)
 2. [Vagrant 1.6.2](http://www.vagrantup.com/downloads)
 3. [Ansible 1.6.1](http://docs.ansible.com/intro_installation.html)
 
+*Note:* Ansible is not supported on Windows. Please follow the instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without Vagrant)" section in this document if you want to build a VM on Windows.
+
 Once you have Virtualbox and Vagrant installed on your machine, you can:
 
 ```
