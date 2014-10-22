@@ -22,6 +22,8 @@
     "email"
 {% if item.redirect_uri[:11] == "smartapp://" or item.client_id == "my_web_app" %}
     ,"launch/patient","profile"
+{% elif item.client_id == "bmj" %}
+    ,"profile"
 {% endif %}
   ],
   "clientDescription": null,
