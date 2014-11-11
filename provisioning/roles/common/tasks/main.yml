@@ -7,6 +7,10 @@
   fail: msg="please define the path to the custom certificates that you would like to use"
   when: use_custom_ssl_certificates and (custom_ssl_certificates_path is not defined)
 
+- name: update aptitude cache
+  tags: [general]
+  apt: update_cache=yes
+  
 - name: install prerequisite packages
   tags: [general]
   environment:
@@ -39,7 +43,7 @@
   apt_repository: repo={{item}}
   with_items: ['ppa:webupd8team/java','ppa:nginx/stable']
 
-- name: update aptitude cache
+- name: update aptitude cache (just in case)
   tags: [general]
   apt: update_cache=yes
   
