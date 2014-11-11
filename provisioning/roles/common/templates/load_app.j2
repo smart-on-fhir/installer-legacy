@@ -19,11 +19,10 @@
     "smart/orchestrate_launch",
     "openid",
     "address",
-    "email"
+    "email",
+    "profile"
 {% if item.redirect_uri[:11] == "smartapp://" or item.client_id == "my_web_app" %}
-    ,"launch/patient","profile"
-{% elif item.client_id == "bmj" %}
-    ,"profile"
+    ,"launch/patient"
 {% endif %}
   ],
   "clientDescription": null,
