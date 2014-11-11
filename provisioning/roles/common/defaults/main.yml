@@ -13,7 +13,7 @@ userpass: secretpass
 install_dir: "/home/{{username}}"
 
 # The version of SMART-on-FHIR to install
-smart_on_fhir_version: "0.0.2"
+smart_on_fhir_version: "0.0.3"
 
 # Suppresses selective task execution (set this to true if you would like to
 # force the playbook to always rebuild the servers and reload them)
