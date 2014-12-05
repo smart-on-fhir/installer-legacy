@@ -5,9 +5,14 @@ are (we have tested with the versions below, but other versions may be fine too)
 
 1. [VirtualBox 4.3.12](https://www.virtualbox.org/wiki/Downloads)
 2. [Vagrant 1.6.2](http://www.vagrantup.com/downloads)
-3. [Ansible 1.6.1](http://docs.ansible.com/intro_installation.html)
+3. [Ansible 1.6.1](http://docs.ansible.com/intro_installation.html) (newer versions are known to cause problems)
 
-*Note:* Ansible is not supported on Windows. Please follow the instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without Vagrant)" section in this document if you want to build a VM on Windows.
+*Note:* Ansible is not supported on Windows. If you want to build a SMART on FHIR VM on Windows,
+please use the version of the installer in the "ansible-guest" branch which runs Ansible on the 
+guest machine instead of using the one on the host OS. To switch the branch, execute
+`git checkout ansible-guest` before running `vagrant up`. Another options is to follow the
+instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without
+Vagrant)" section in this document.
 
 Once you have Virtualbox and Vagrant installed on your machine, you can:
 
