@@ -72,6 +72,7 @@ ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml
 
 ## Notes
 
+### SSL
 By default, the install process will not enable SSL. To enable SSL for specific services, you can set the following variables to `true`:
 
 * `auth_server_secure_http`: Authorization server
@@ -87,3 +88,9 @@ Please note that with self-signed certificates, you will get a number of trust w
 web browser that can be resolved by adding certificate exceptions in your browser, or updating your CA list on
 a client by client basis. Before you even try the apps, you should probably load the
 API server and add the self-signed certificate to your browser's security exceptions.
+
+### Sample data
+By [default](provisioning/roles/common/defaults/main.yml#L103), the server will load data for only 10 sample patients. To automatically load the entire set of ~60 samples patients, you can update your `custom_settings` to increase this limit:
+
+* `sample_patients_limit: 100`
+
