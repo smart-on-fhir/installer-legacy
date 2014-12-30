@@ -3,9 +3,9 @@
 The three prerequisites, which are available on Mac, Windows, and Linux 
 are (we have tested with the versions below, but other versions may be fine too):
 
-1. [VirtualBox 4.3.12](https://www.virtualbox.org/wiki/Downloads)
-2. [Vagrant 1.6.2](http://www.vagrantup.com/downloads)
-3. [Ansible 1.6.1](http://docs.ansible.com/intro_installation.html) (newer versions are known to cause problems)
+1. [VirtualBox 4.3.20](https://www.virtualbox.org/wiki/Downloads)
+2. [Vagrant 1.7.1](http://www.vagrantup.com/downloads)
+3. [Ansible 1.8.2](http://docs.ansible.com/intro_installation.html)
 
 *Note:* Ansible is not supported on Windows. If you want to build a SMART on FHIR VM on Windows,
 please use the version of the installer in the "ansible-guest" branch which runs Ansible on the 
