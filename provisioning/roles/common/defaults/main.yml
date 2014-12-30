@@ -17,7 +17,7 @@ smart_on_fhir_version: "0.0.3"
 
 # Suppresses selective task execution (set this to true if you would like to
 # force the playbook to always rebuild the servers and reload them)
-force_rebuild: false
+force_rebuild: true
 
 # Settigs for Jetty and Oracle Java. You probably won't have to alter these
 # unles you are switching to a different version of Jetty or Java
