@@ -29,7 +29,9 @@
 - name: clear auth server data
   tags: [auth]
   file: path={{auth_server_db_file}} state=absent
+  file: path={{auth_server_db_file}}.{{item}} state=absent
   when: not auth_server_preserve_db
+  with_items: ["tmp", "properties", "script", "log"]
 
 # TODO should probably configure the data-context in the overlay project 
 # instead of configuring on-the-fly here. (When the overlay is working.)
