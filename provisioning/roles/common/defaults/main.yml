@@ -5,7 +5,7 @@
 # To customize the SMART-on-FHIR stack, you can either edit the settings directly in
 # this file or set up custom settings overrides (such as custom_settings.yml)
 
-# The user accunt that will host the servers. If a user account of this name
+# The user account that will host the servers. If a user account of this name
 # already exists on the system, the installer will not alter its credentials or
 # authentication mechanism
 username: fhir
@@ -84,15 +84,10 @@ auth_server_db_file: "{{install_dir}}/auth_server_db.hsql"
 # When set to true Ansible will not reset the authorization server database
 auth_server_preserve_db: false
 
-# LDAP server high-level configuration
-ldap_server_domain: "example.com"
+# LDAP server configuration
 ldap_server_host: "localhost"
 ldap_server_base: "dc=example,dc=com"
 ldap_server_uri: "ldap://{{ldap_server_host}}:389"
-ldap_server_organization: "Example Company"
-ldap_server_admin_password: "sample-password"
-
-# When set to true will force TLS and disalow anonymous binds for the LDAP server
 ldap_server_tls: false
 
 # General settings for the sample patients set
@@ -121,12 +116,6 @@ app_server_ssl_locality: "{{auth_server_ssl_locality}}"
 app_server_ssl_organization: "{{auth_server_ssl_organization}}"
 app_server_ssl_division: "{{auth_server_ssl_division}}"
 app_server_ssl_email: "{{auth_server_ssl_email}}"
-ldap_server_ssl_country: "{{auth_server_ssl_country}}"
-ldap_server_ssl_province: "{{auth_server_ssl_province}}"
-ldap_server_ssl_locality: "{{auth_server_ssl_locality}}"
-ldap_server_ssl_organization: "{{auth_server_ssl_organization}}"
-ldap_server_ssl_division: "{{auth_server_ssl_division}}"
-ldap_server_ssl_email: "{{auth_server_ssl_email}}"
 
 # These are convenience variables with the generated base paths of the servers. You
 # most likely will never have to touch these.

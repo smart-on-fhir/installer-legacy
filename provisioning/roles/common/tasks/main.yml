@@ -124,8 +124,7 @@
   command: echo
   notify:
         - restart nginx
- 
-- include: ldap.yml
+
 - include: api-server.yml
 - include: auth-server.yml
 - include: sample-data.yml
