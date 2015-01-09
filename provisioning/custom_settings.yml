@@ -5,5 +5,6 @@ userpass: "secretpass"
 auth_server_host: "localhost"
 fhir_server_host: "localhost"
 app_server_host: "localhost"
+docs_server_host: "localhost"
 #use_custom_ssl_certificates: false
 #custom_ssl_certificates_path: /example/local/path
