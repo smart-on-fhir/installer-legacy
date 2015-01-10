@@ -17,3 +17,4 @@
     app_server_port: "443"
   roles:
     - common
+    - ldap

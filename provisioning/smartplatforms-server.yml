@@ -1,31 +1,41 @@
 ---
-keystore_password: "SECRET1"
-userpass: "SECRET2"
-auth_server_password: "SECRET3"
-fhir_server_password: "SECRET4"
-ldap_server_admin_password: "SECRET5"
-username: "fhir"
-auth_server_host: "authorize.smartplatforms.org"
-fhir_server_host: "fhir-api.smartplatforms.org"
-app_server_host: "fhir.smartplatforms.org"
-fhir_server_secure_http: true
-app_server_secure_http: true
-auth_server_secure_http: true
-fhir_server_port: 443
-app_server_port: 443
-auth_server_port: 443
-sample_patients_limit: 9999
-ldap_server_domain: "smartplatforms.org"
-ldap_server_host: "ldap.smartplatforms.org"
-ldap_server_base: "dc=smartplatforms,dc=org"
-ldap_server_uri: "ldap://{{ldap_server_host}}:389"
-ldap_server_organization: "SMART Platforms"
-ldap_server_tls: false
-use_custom_ssl_certificates: true
-custom_ssl_certificates_path: ../../certificates
-fhir_server_branch: "sandbox"
-app_server_branch: "sandbox"
-auth_ldap_server_branch: "sandbox"
-sample_patients_branch: "sandbox"
-auth_server_branch: "sandbox"
-force_rebuild: true
+- hosts: all
+  sudo: true
+  vars:
+    keystore_password: "SECRET1"
+    userpass: "SECRET2"
+    auth_server_password: "SECRET3"
+    fhir_server_password: "SECRET4"
+    ldap_server_admin_password: "SECRET5"
+    username: "fhir"
+    auth_server_host: "authorize.smartplatforms.org"
+    fhir_server_host: "fhir-api.smartplatforms.org"
+    app_server_host: "fhir.smartplatforms.org"
+    docs_server_host: "fhir-docs.smartplatforms.org"
+    fhir_server_secure_http: true
+    app_server_secure_http: true
+    auth_server_secure_http: true
+    docs_server_secure_http: false
+    fhir_server_port: 443
+    app_server_port: 443
+    auth_server_port: 443
+    docs_server_port: 80
+    sample_patients_limit: 9999
+    ldap_server_domain: "smartplatforms.org"
+    ldap_server_host: "ldap.smartplatforms.org"
+    ldap_server_base: "dc=smartplatforms,dc=org"
+    ldap_server_uri: "ldap://{{ldap_server_host}}:389"
+    ldap_server_organization: "SMART Platforms"
+    ldap_server_tls: false
+    use_custom_ssl_certificates: true
+    custom_ssl_certificates_path: ../../certificates
+    fhir_server_branch: "sandbox"
+    app_server_branch: "sandbox"
+    auth_ldap_server_branch: "sandbox"
+    sample_patients_branch: "sandbox"
+    auth_server_branch: "sandbox"
+    force_rebuild: true
+  roles:
+    - common
+    - ldap
+    - docs
