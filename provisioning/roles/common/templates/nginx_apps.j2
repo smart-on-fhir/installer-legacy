@@ -4,11 +4,6 @@ server {
 {% endif %}
 
     listen {{app_server_port}};
-    
-    {% if app_server_port != 80 and app_server_on_80 %}
-        listen 80;
-    {% endif %}
-    
 
     location / {
        root {{install_dir}}/apps/static;
