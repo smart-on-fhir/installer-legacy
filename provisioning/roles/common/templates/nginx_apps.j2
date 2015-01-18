@@ -21,7 +21,7 @@ server {
 {% endif %}
 }
 
-{% if app_server_port != 80 and http_redirect and !app_server_on_80 %}
+{% if app_server_port != 80 and http_redirect and not app_server_on_80 %}
 server {
     server_name {{app_server_host}};
     rewrite ^       {{app_server_base}}$request_uri? permanent;
