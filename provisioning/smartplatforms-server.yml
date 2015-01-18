@@ -18,6 +18,7 @@
     docs_server_secure_http: false
     fhir_server_port: 443
     app_server_port: 443
+    app_server_on_80: true
     auth_server_port: 443
     docs_server_port: 80
     sample_patients_limit: 9999

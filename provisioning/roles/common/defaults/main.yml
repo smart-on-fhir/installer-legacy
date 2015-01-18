@@ -64,6 +64,7 @@ fhir_server_preserve_db: false
 app_server_secure_http: false
 app_server_host: "localhost"
 app_server_port: 9090
+app_server_on_80: false
 app_server_repo: "https://github.com/smart-on-fhir/apps.git"
 app_server_branch: "v{{smart_on_fhir_version}}"
 
