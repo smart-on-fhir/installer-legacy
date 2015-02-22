@@ -6,6 +6,9 @@
   with_items:
          - ruby-dev
          - nodejs
+         - zlibc
+         - zlib1g
+         - zlib1g-dev
          
 - name: install jekyll
   tags: [general]
