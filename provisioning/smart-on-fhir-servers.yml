@@ -6,4 +6,3 @@
   roles:
     - common
     - ldap
-    - docs
