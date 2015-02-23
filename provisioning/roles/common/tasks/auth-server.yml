@@ -11,6 +11,7 @@
   git: repo={{auth_server_repo}}
        version={{auth_server_branch}}
        dest={{install_dir}}/auth-server
+       update={{update_repositories}}
   register: auth_checkout
   
 - name: checkout auth ldap server
@@ -19,6 +20,7 @@
   git: repo={{auth_ldap_server_repo}}
        version={{auth_ldap_server_branch}}
        dest={{install_dir}}/auth-server-ldap
+       update={{update_repositories}}
   register: auth_ldap_checkout
   
 - name: stop auth server

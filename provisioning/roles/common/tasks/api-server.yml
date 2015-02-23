@@ -30,6 +30,7 @@
   git: repo={{fhir_server_repo}}
        version={{fhir_server_branch}}
        dest={{install_dir}}/api-server
+       update={{update_repositories}}
   register: sof_checkout
 
 - name: stop api server

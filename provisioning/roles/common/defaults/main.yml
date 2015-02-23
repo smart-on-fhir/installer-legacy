@@ -19,6 +19,11 @@ smart_on_fhir_version: "0.0.4"
 # force the playbook to always rebuild the servers and reload them)
 force_rebuild: true
 
+# By default Ansible will update the local copies of the servers code from
+# the source repositories. Set this to "no" if you would rather not have the
+# repositories updated on each run.
+update_repositories: yes
+
 # Settigs for Jetty and Oracle Java. You probably won't have to alter these
 # unles you are switching to a different version of Jetty or Java
 jetty_download_url: "http://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.1.0.M0/jetty-runner-9.1.0.M0.jar"

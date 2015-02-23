@@ -4,6 +4,7 @@
   git: repo={{sample_patients_repo}}
        version={{sample_patients_branch}}
        dest={{install_dir}}/sample-patients
+       update={{update_repositories}}
   register: sample_patients_checkout
 
 - name: build sample patients
@@ -36,6 +37,7 @@
   git: repo={{app_server_repo}}
        version={{app_server_branch}}
        dest={{install_dir}}/apps
+       update={{update_repositories}}
   register: apps_checkout
 
 - name: configure sample apps server

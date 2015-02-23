@@ -22,6 +22,11 @@ force_rebuild: true
 use_custom_ssl_certificates: false
 #custom_ssl_certificates_path: examples/certificates
 
+# By default Ansible will update the local copies of the servers code from
+# the source repositories. Set this to "no" if you would rather not have the
+# repositories updated on each run.
+update_repositories: yes
+
 # Controls whether HTTP requests on port 80 will be
 # redirected to the server's base URLs
 http_redirect: true

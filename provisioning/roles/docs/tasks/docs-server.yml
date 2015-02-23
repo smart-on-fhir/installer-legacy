@@ -23,6 +23,7 @@
   git: repo={{docs_server_repo}}
        version={{docs_server_branch}}
        dest={{install_dir}}/docs/repo
+       update={{update_repositories}}
   register: docs_checkout
   
 - name: delete static directory
