@@ -7,6 +7,8 @@ server {
 
     location / {
        root {{install_dir}}/apps/static;
+       expires 1h;
+       add_header Cache-Control "public";
     }
 
 {% if app_server_secure_http %}
@@ -30,6 +32,8 @@ server {
     listen 80;
     location / {
        root {{install_dir}}/apps/static;
+       expires 1h;
+       add_header Cache-Control "public";
     }
 }
 {% endif %}
