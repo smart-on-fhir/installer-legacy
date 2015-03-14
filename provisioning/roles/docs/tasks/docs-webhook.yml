@@ -15,4 +15,4 @@
 
 - name: restart update listener
   tags: [docs-webhook]
-  service: name=auth-server state=restarted
+  service: name=docs-webhook state=restarted
