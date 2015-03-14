@@ -18,6 +18,8 @@
   with_items:
          - git
          - nginx
+         - nodejs
+         - npm
 
 - name: create group
   tags: [general]
@@ -66,3 +68,11 @@
         - restart nginx
 
 - include: docs-server.yml
+- include: docs-webhook.yml
+
+- name: generate docs sites
+  tags: [docs,docs-rebuild]
+  sudo_user: "{{username}}"
+  shell: chdir={{install_dir}}/docs/webhook_receiver
+         /bin/bash update.sh
+ 
