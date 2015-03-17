@@ -35,31 +35,6 @@
   sudo_user: "{{username}}"
   file: path={{install_dir}}/docs/static state=directory
   
-- name: list releases
-  tags: [docs,docs-rebuild]
-  shell: chdir={{install_dir}}/docs/repo
-         git tag
-  register: docs_releases
-   
-- name: list branches
-  tags: [docs,docs-rebuild]
-  shell: chdir={{install_dir}}/docs/repo
-         git for-each-ref refs/remotes/origin --format="%(refname:short)" | cut -d"/" -f2 | grep -v HEAD
-  register: docs_branches
-  
-- name: generate release configuration files
-  tags: [docs,docs-rebuild]
-  shell: 'echo "baseurl: /{{item}}/" > /tmp/_config-{{item}}.yml'
-  with_items: docs_releases.stdout_lines + docs_branches.stdout_lines
-  
-- name: generate docs sites
-  tags: [docs,docs-rebuild]
-  sudo_user: "{{username}}"
-  shell: 'chdir={{install_dir}}/docs/repo
-          git checkout {{item}};
-          jekyll build --source {{install_dir}}/docs/repo --destination {{install_dir}}/docs/static/{{item}} --config {{install_dir}}/docs/repo/_config.yml,/tmp/_config-{{item}}.yml'
-  with_items: docs_releases.stdout_lines + docs_branches.stdout_lines
-  
 - name: generate self-signed ssl certificate (docs server)
   tags: [docs]
   when: docs_server_secure_http and not use_custom_ssl_certificates

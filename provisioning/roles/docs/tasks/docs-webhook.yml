@@ -1,0 +1,18 @@
+- name: Put update script in place
+  tags: [docs-webhook]
+  sudo_user: "{{username}}"
+  copy: src=webhook_receiver dest={{install_dir}}/docs/
+
+- name: Install npm dependencies for update script
+  tags: [docs-webhook]
+  sudo_user: "{{username}}"
+  shell: chdir={{install_dir}}/docs/webhook_receiver
+         npm install
+
+- name: Install upstart job for update script
+  tags: [docs-webhook]
+  template: src=docs-webhook.conf.j2 dest=/etc/init/docs-webhook.conf owner=root group=root mode=0644
+
+- name: restart update listener
+  tags: [docs-webhook]
+  service: name=docs-webhook state=restarted

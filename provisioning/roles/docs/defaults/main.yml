@@ -46,6 +46,11 @@ docs_server_ssl_organization: Example Company
 docs_server_ssl_division: support
 docs_server_ssl_email: support@example.com
 
+# To receive webhooks when docs are updated
+docs_webhook_path: /github-notification
+docs_webhook_port: 6748
+docs_webhook_secret: default-webhook-secret
+
 # These are convenience variables with the generated base paths of the servers. You
 # most likely will never have to touch these.
 docs_server_base: "{{
