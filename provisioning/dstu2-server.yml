@@ -7,6 +7,7 @@
     auth_server_password: "SECRET3"
     fhir_server_password: "SECRET4"
     ldap_server_admin_password: "SECRET5"
+    docs_webhook_secret: "SECRET6"
     username: "fhir"
     auth_server_host: "authorize-dstu2.smarthealthit.org"
     fhir_server_host: "fhir-api-dstu2.smarthealthit.org"
