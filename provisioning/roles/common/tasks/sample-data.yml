@@ -31,6 +31,34 @@
            --data-binary @{{item}}"
   with_items: sample_patient_files.stdout_lines
 
+- name: load custom patients (json)
+  tags: [patients, load_patients]
+  when: 
+    ((sof_checkout.changed or sample_patients_checkout.changed) or force_rebuild)
+    and (not fhir_server_preserve_db)
+    and include_custom_patients
+  shell: "chdir={{install_dir}}/sample-patients/custom-data/
+         curl
+           -u {{fhir_server_client}}:{{fhir_server_password}}
+           'http://localhost:3000/?'
+           -H 'Content-Type: application/json' 
+           --data-binary @{{item}}"
+  with_fileglob: "{{install_dir}}/sample-patients/custom-data/*.json"
+
+- name: load custom patients (xml)
+  tags: [patients, load_patients]
+  when: 
+    ((sof_checkout.changed or sample_patients_checkout.changed) or force_rebuild)
+    and (not fhir_server_preserve_db)
+    and include_custom_patients
+  shell: "chdir={{install_dir}}/sample-patients/custom-data/
+         curl
+           -u {{fhir_server_client}}:{{fhir_server_password}}
+           'http://localhost:3000/?'
+           -H 'Content-Type: text/xml' 
+           --data-binary @{{item}}"
+  with_fileglob: "{{install_dir}}/sample-patients/custom-data/*.xml"
+
 - name: checkout sample apps
   tags: [apps]
   sudo_user: "{{username}}"

@@ -108,6 +108,7 @@ sample_patients_branch: "v{{smart_on_fhir_version}}"
 
 # choose how many sample patients to load in the server or set to 9999 for all of them
 sample_patients_limit: 10
+include_custom_patients: false
 
 # Self-signed SSL certificates settings (if generating self-signed certificates)
 auth_server_ssl_country: US
