@@ -38,6 +38,7 @@
     auth_server_branch: "sandbox"
     force_rebuild: true
     auth_server_preserve_db: true
+    include_custom_patients: true
   roles:
     - common
     - ldap
