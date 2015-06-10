@@ -40,8 +40,12 @@
   when: auth_config_1.changed or auth_config_2.changed
   wait_for: port=4000
 
-- name: configure MPR Monitor
+- name: configure MPR Monitor (step 1)
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/my_web_app/{{ mpr_monitor_client_id | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
+  
+- name: configure MPR Monitor (step 2)
   tags: [apps]
   sudo_user: "{{username}}"
   shell: sed -i -e 's/http:\/\/localhost:8000/{{ mpr_monitor_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
-  shell: sed -i -e 's/my_web_app/{{ mpr_monitor_client_id | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
