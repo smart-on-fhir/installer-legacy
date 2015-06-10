@@ -68,10 +68,30 @@
        update={{update_repositories}}
   register: apps_checkout
 
-- name: configure sample apps server
+#- name: configure sample apps server
+#  tags: [apps]
+#  sudo_user: "{{username}}"
+#  shell: sed -i -e 's/http:\/\/localhost:9080/{{ fhir_server_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/static/fhirStarter/services.js
+
+- name: configure sample apps server (services.js)
   tags: [apps]
   sudo_user: "{{username}}"
-  shell: sed -i -e 's/http:\/\/localhost:9080/{{ fhir_server_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/static/fhirStarter/services.js
+  template: src="config/services.js.j2"
+            dest="{{install_dir}}/apps/static/fhirStarter/services.js"
+            owner="{{username}}" group="{{username}}" mode=0644
+            
+- name: configure sample apps server (apps.json)
+  tags: [apps]
+  sudo_user: "{{username}}"
+  template: src="config/apps.json.j2"
+            dest="{{install_dir}}/apps/static/fhirStarter/apps.json"
+            owner="{{username}}" group="{{username}}" mode=0644
+                
+- name: configure nginx (sample apps)
+  tags: [apps,nginx]
+  template: src=nginx_apps.j2 dest=/etc/nginx/sites-enabled/apps owner=root group=root mode=0644
+  notify:
+        - restart nginx
 
 - name: list sample apps
   tags: [apps, load_apps]

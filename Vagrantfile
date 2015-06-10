@@ -23,6 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 389, host: 1389
 #  config.vm.network :forwarded_port, guest: 9999, host: 9999
   config.vm.network "private_network", ip: "192.168.50.4"
+  
+  config.vm.provision "shell", path: "provisioning/fetch-templates.sh", args: ["/vagrant/provisioning/roles/common/templates/config","master"]
 
   config.vm.provision "ansible" do |ansible|
     #ansible.verbose = "vvvv"

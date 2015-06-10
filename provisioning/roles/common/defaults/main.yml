@@ -54,6 +54,7 @@ fhir_server_client: client
 fhir_server_password: secret
 fhir_server_repo: "https://github.com/smart-on-fhir/api-server.git"
 fhir_server_branch: "v{{smart_on_fhir_version}}"
+fhir_server_name: "Local FHIR dev server"
 
 # Specific settings for the SMART-on-FHIR server authorization behavior
 fhir_server_use_auth: true

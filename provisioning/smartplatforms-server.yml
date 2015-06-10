@@ -9,6 +9,7 @@
     ldap_server_admin_password: "SECRET5"
     docs_webhook_secret: "SECRET6"
     username: "fhir"
+    fhir_server_name: "SMART on FHIR (smarthealthit.org)"
     auth_server_host: "authorize.smarthealthit.org"
     fhir_server_host: "fhir-api.smarthealthit.org"
     app_server_host: "fhir.smarthealthit.org"
@@ -31,11 +32,11 @@
     ldap_server_tls: false
     use_custom_ssl_certificates: true
     custom_ssl_certificates_path: ../../certificates
-    fhir_server_branch: "sandbox"
-    app_server_branch: "sandbox"
-    auth_ldap_server_branch: "sandbox"
-    sample_patients_branch: "sandbox"
-    auth_server_branch: "sandbox"
+    fhir_server_branch: "master"
+    app_server_branch: "master"
+    auth_ldap_server_branch: "smart-launch"
+    sample_patients_branch: "master"
+    auth_server_branch: "smart-launch"
     force_rebuild: true
     auth_server_preserve_db: true
     include_custom_patients: true
