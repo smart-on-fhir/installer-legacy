@@ -1,0 +1,4 @@
+---
+username: fhir
+install_dir: "/home/{{username}}"
+java_home_dir: "/usr/lib/jvm/java-7-oracle"

@@ -1,0 +1,41 @@
+- name: copy login.jsp
+  tags: [auth]
+  sudo_user: "{{username}}"
+  copy: src=auth-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/views/login.jsp
+        dest={{install_dir}}/auth-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/views/
+  register: auth_config_1
+        
+- name: copy DefaultOIDCTokenService.java
+  tags: [auth]
+  sudo_user: "{{username}}"
+  copy: src=auth-server/openid-connect-server/src/main/java/org/mitre/openid/connect/service/impl/DefaultOIDCTokenService.java
+        dest={{install_dir}}/auth-server/openid-connect-server/src/main/java/org/mitre/openid/connect/service/impl/
+  register: auth_config_2
+
+- name: build auth server
+  tags: [auth]
+  sudo_user: "{{username}}"
+  when: auth_config_1.changed or auth_config_2.changed
+  environment:
+    JAVA_HOME: "{{java_home_dir}}"
+  shell: chdir={{install_dir}}/auth-server
+       mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true
+
+- name: build auth ldap overlay
+  tags: [auth]
+  sudo_user: "{{username}}"
+  when: auth_config_1.changed or auth_config_2.changed
+  environment:
+    JAVA_HOME: "{{java_home_dir}}"
+  shell: chdir={{install_dir}}/auth-server-ldap
+       mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true
+
+- name: restart auth server
+  tags: [auth]
+  when: auth_config_1.changed or auth_config_2.changed
+  service: name=auth-server state=restarted
+
+- name: wait for auth server to become available
+  tags: [auth]
+  when: auth_config_1.changed or auth_config_2.changed
+  wait_for: port=4000

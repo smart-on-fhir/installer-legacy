@@ -42,5 +42,6 @@
     include_custom_patients: true
   roles:
     - common
+    - sandbox
     - ldap
     - docs
