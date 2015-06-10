@@ -2,3 +2,5 @@
 username: fhir
 install_dir: "/home/{{username}}"
 java_home_dir: "/usr/lib/jvm/java-7-oracle"
+mpr_monitor_base: "http://localhost:8000"
+mpr_monitor_client_id: "my_web_app"
