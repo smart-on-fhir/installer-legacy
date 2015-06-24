@@ -6,7 +6,7 @@ install:
   - "sudo apt-get install -y npm python-demjson"
   - "pip install --allow-all-external PyYAML==3.11"
   - "pip install --allow-all-external demjson"
-  - "pip install --allow-all-external ansible==1.6.1"
+  - "pip install --allow-all-external ansible==1.8.2"
 script:
   - |
     for yml in $(find . -name "*.yml"); do
