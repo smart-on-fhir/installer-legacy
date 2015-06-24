@@ -29,5 +29,5 @@ script:
     set -e
     cd provisioning
     for play in $plays; do
-      ansible-playbook -i localhost, --syntax-check ${play}.yml
+      ansible-playbook -i localhost, ${play}.yml
     done
