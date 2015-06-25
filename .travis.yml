@@ -7,6 +7,7 @@ install:
   - "pip install --allow-all-external PyYAML==3.11"
   - "pip install --allow-all-external demjson"
   - "pip install --allow-all-external ansible==1.8.2"
+  - "ssh-keyscan -H localhost >> ~/.ssh/known_hosts"
 script:
   - |
     for yml in $(find . -name "*.yml"); do
