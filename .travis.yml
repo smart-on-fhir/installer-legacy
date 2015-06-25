@@ -30,5 +30,5 @@ script:
     set -e
     cd provisioning
     for play in $plays; do
-      ansible-playbook  -vvvv -i localhost, ${play}.yml
+      ansible-playbook  -vvvv -i localhost, -c local ${play}.yml
     done
