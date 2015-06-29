@@ -66,12 +66,20 @@ fhir_server_token_uri: "{{auth_server_base}}/token"
 # When set to true Ansible will not reset the SMART-on-FHIR database
 fhir_server_preserve_db: false
 
-# General settings for the FHIR-Starter application server
+# General settings for the applications server
 app_server_secure_http: false
 app_server_host: "localhost"
 app_server_port: 9090
-app_server_repo: "https://github.com/smart-on-fhir/apps.git"
-app_server_branch: "v{{smart_on_fhir_version}}"
+fhir_starter_repo: "https://github.com/smart-on-fhir/fhir-starter.git"
+cardiac_risk_repo: "https://github.com/smart-on-fhir/cardiac-risk-app.git"
+bp_centiles_repo: "https://github.com/smart-on-fhir/bp-centiles-app.git"
+growth_chart_repo: "https://github.com/smart-on-fhir/growth-chart-app.git"
+fhir_demo_app_repo: "https://github.com/smart-on-fhir/fhir-demo-app.git"
+fhir_starter_branch: "v{{smart_on_fhir_version}}"
+cardiac_risk_branch: "v{{smart_on_fhir_version}}"
+bp_centiles_branch: "v{{smart_on_fhir_version}}"
+growth_chart_branch: "v{{smart_on_fhir_version}}"
+fhir_demo_app_branch: "v{{smart_on_fhir_version}}"
 
 # To help circumvent some browser security troubles when mixing https and http
 # content you may want to serve the sample apps on port 80 in parallel to

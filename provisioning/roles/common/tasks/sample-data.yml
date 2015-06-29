@@ -59,19 +59,27 @@
            --data-binary @{{item}}"
   with_fileglob: "{{install_dir}}/sample-patients/custom-data/*.xml"
 
-- name: checkout sample apps
-  tags: [apps]
-  sudo_user: "{{username}}"
-  git: repo={{app_server_repo}}
-       version={{app_server_branch}}
-       dest={{install_dir}}/apps
-       update={{update_repositories}}
-  register: apps_checkout
+#- name: checkout sample apps
+#  tags: [apps]
+#  sudo_user: "{{username}}"
+#  git: repo={{app_server_repo}}
+#       version={{app_server_branch}}
+#       dest={{install_dir}}/apps
+#       update={{update_repositories}}
+#  register: apps_checkout
 
 #- name: configure sample apps server
 #  tags: [apps]
 #  sudo_user: "{{username}}"
 #  shell: sed -i -e 's/http:\/\/localhost:9080/{{ fhir_server_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/static/fhirStarter/services.js
+
+- name: checkout fhir starter
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{fhir_starter_repo}}
+       version={{fhir_starter_branch}}
+       dest={{install_dir}}/apps/static
+       update={{update_repositories}}
 
 - name: configure sample apps server (services.js)
   tags: [apps]
@@ -86,7 +94,53 @@
   template: src="config/apps.json.j2"
             dest="{{install_dir}}/apps/static/fhirStarter/apps.json"
             owner="{{username}}" group="{{username}}" mode=0644
-                
+
+- name: checkout cardiac risk app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{cardiac_risk_repo}}
+       version={{cardiac_risk_branch}}
+       dest={{install_dir}}/apps/static/apps/cardiac-risk
+       update={{update_repositories}}
+       
+- name: checkout bp centiles app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{bp_centiles_repo}}
+       version={{bp_centiles_branch}}
+       dest={{install_dir}}/apps/static/apps/bp-centiles
+       update={{update_repositories}}
+
+- name: checkout growth chart app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{growth_chart_repo}}
+       version={{growth_chart_branch}}
+       dest={{install_dir}}/apps/static/apps/growth-chart
+       update={{update_repositories}}
+
+- name: checkout fhir demo app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{fhir_demo_app_repo}}
+       version={{fhir_demo_app_branch}}
+       dest={{install_dir}}/apps/static/apps/fhir-demo
+       update={{update_repositories}}
+       
+- name: configure sample apps
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/node_modules\/fhirclient\/fhir-client\.js/\.\.\/\.\.\/js\/fhir-client\.js/' {{install_dir}}/apps/static/apps/{{item}}
+  with_items:
+        - bp-centiles/index.html
+        - bp-centiles/launch.html
+        - cardiac-risk/index.html
+        - cardiac-risk/launch.html
+        - growth-chart/index.html
+        - growth-chart/launch.html
+        - fhir-demo/app/index.html
+        - fhir-demo/app/launch.html
+ 
 - name: configure nginx (sample apps)
   tags: [apps,nginx]
   template: src=nginx_apps.j2 dest=/etc/nginx/sites-enabled/apps owner=root group=root mode=0644
