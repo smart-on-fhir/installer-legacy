@@ -1,3 +1,9 @@
+- name: install prerequisite packages
+  tags: [general]
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  apt: pkg=python-pip force=yes
+
 - name: copy login.jsp
   tags: [auth]
   sudo_user: "{{username}}"
@@ -48,12 +54,16 @@
        dest={{install_dir}}/apps/rest/mpr_monitor
        update={{update_repositories}}
 
-- name: configure MPR Monitor (step 1)
+- name: configure mpr monitor (step 1)
   tags: [apps]
   sudo_user: "{{username}}"
   shell: sed -i -e 's/my_web_app/{{ mpr_monitor_client_id | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
   
-- name: configure MPR Monitor (step 2)
+- name: configure mpr monitor (step 2)
   tags: [apps]
   sudo_user: "{{username}}"
   shell: sed -i -e 's/http:\/\/localhost:8000/{{ mpr_monitor_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
+  
+- name: install pip prerequisites to mpr monitor
+  tags: [apps]
+  pip: requirements={{install_dir}}/apps/rest/mpr_monitor/requirements.txt

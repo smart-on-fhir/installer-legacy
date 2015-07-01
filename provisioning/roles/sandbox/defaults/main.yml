@@ -7,3 +7,4 @@ mpr_monitor_repo: "https://github.com/smart-on-fhir/mpr-monitor-app.git"
 mpr_monitor_branch: "v{{smart_on_fhir_version}}"
 mpr_monitor_base: "http://localhost:8000"
 mpr_monitor_client_id: "my_web_app"
+update_repositories: yes
