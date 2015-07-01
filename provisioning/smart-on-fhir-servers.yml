@@ -4,4 +4,5 @@
   vars_files:
     - custom_settings.yml
   roles:
-    - sandbox
+    - common
+    - ldap
