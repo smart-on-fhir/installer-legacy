@@ -12,9 +12,6 @@ username: fhir
 userpass: secretpass
 install_dir: "/home/{{username}}"
 
-# The version of SMART-on-FHIR to install
-smart_on_fhir_version: "0.0.5"
-
 # Suppresses selective task execution (set this to true if you would like to
 # force the playbook to always rebuild the servers and reload them)
 force_rebuild: true
@@ -53,7 +50,7 @@ fhir_server_port: 9080
 fhir_server_client: client
 fhir_server_password: secret
 fhir_server_repo: "https://github.com/smart-on-fhir/api-server.git"
-fhir_server_branch: "v{{smart_on_fhir_version}}"
+fhir_server_branch: "v0.0.5"
 fhir_server_name: "Local FHIR dev server"
 
 # Specific settings for the SMART-on-FHIR server authorization behavior
@@ -75,11 +72,11 @@ cardiac_risk_repo: "https://github.com/smart-on-fhir/cardiac-risk-app.git"
 bp_centiles_repo: "https://github.com/smart-on-fhir/bp-centiles-app.git"
 growth_chart_repo: "https://github.com/smart-on-fhir/growth-chart-app.git"
 fhir_demo_app_repo: "https://github.com/smart-on-fhir/fhir-demo-app.git"
-fhir_starter_branch: "v{{smart_on_fhir_version}}"
-cardiac_risk_branch: "v{{smart_on_fhir_version}}"
-bp_centiles_branch: "v{{smart_on_fhir_version}}"
-growth_chart_branch: "v{{smart_on_fhir_version}}"
-fhir_demo_app_branch: "v{{smart_on_fhir_version}}"
+fhir_starter_branch: "v0.0.5"
+cardiac_risk_branch: "v0.0.5"
+bp_centiles_branch: "v0.0.5"
+growth_chart_branch: "v0.0.5"
+fhir_demo_app_branch: "v0.0.5"
 
 # To help circumvent some browser security troubles when mixing https and http
 # content you may want to serve the sample apps on port 80 in parallel to
@@ -95,9 +92,9 @@ auth_server_port: 9085
 auth_server_client: client
 auth_server_password: secret
 auth_server_repo: "https://github.com/smart-on-fhir/auth-server.git"
-auth_server_branch: "f{{smart_on_fhir_version}}"
+auth_server_branch: "f0.0.5"
 auth_ldap_server_repo: "https://github.com/smart-on-fhir/auth-server-ldap.git"
-auth_ldap_server_branch: "f{{smart_on_fhir_version}}"
+auth_ldap_server_branch: "f0.0.4"
 auth_server_war: auth-server-ldap/ldap-server-overlay/target/ldap-openid-connect-server.war
 auth_server_data_context: "{{install_dir}}/auth-server/openid-connect-server-webapp/src/main/webapp/WEB-INF/data-context.xml"
 auth_server_db_file: "{{install_dir}}/auth_server_db.hsql"
@@ -113,7 +110,7 @@ ldap_server_tls: false
 
 # General settings for the sample patients set
 sample_patients_repo: "https://github.com/smart-on-fhir/sample-patients.git"
-sample_patients_branch: "v{{smart_on_fhir_version}}"
+sample_patients_branch: "v0.0.5"
 
 # choose how many sample patients to load in the server or set to 9999 for all of them
 sample_patients_limit: 10
