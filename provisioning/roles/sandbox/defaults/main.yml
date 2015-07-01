@@ -5,6 +5,11 @@ java_home_dir: "/usr/lib/jvm/java-7-oracle"
 smart_on_fhir_version: "0.0.5"
 mpr_monitor_repo: "https://github.com/smart-on-fhir/mpr-monitor-app.git"
 mpr_monitor_branch: "v{{smart_on_fhir_version}}"
-mpr_monitor_base: "http://localhost:8000"
+mpr_monitor_server_host: "localhost"
+mpr_monitor_server_port: 8000
+mpr_monitor_secure_http: false
+mpr_monitor_base: "{{
+    'https' if mpr_monitor_secure_http else 'http' }}://{{mpr_monitor_server_host}}{{(
+    ':'+mpr_monitor_server_port|string) if mpr_monitor_server_port|int not in (80,443) else ''}}"
 mpr_monitor_client_id: "my_web_app"
 update_repositories: yes

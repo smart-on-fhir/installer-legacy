@@ -1,8 +1,15 @@
+- name: stop nginx
+  service: name=nginx state=stopped
+
 - name: install prerequisite packages
   tags: [general]
   environment:
     DEBIAN_FRONTEND: noninteractive
-  apt: pkg=python-pip force=yes
+  apt: pkg={{item}} force=yes
+  with_items:
+       - apache2
+       - python-pip
+       - libapache2-mod-wsgi
 
 - name: copy login.jsp
   tags: [auth]
@@ -67,3 +74,21 @@
 - name: install pip prerequisites to mpr monitor
   tags: [apps]
   pip: requirements={{install_dir}}/apps/rest/mpr_monitor/requirements.txt
+
+- name: configure apache (remove default server)
+  tags: [apps]
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  
+- name: configure apache (mpr monitor server)
+  tags: [apps]
+  template: src=mpr-monitor.conf.j2 dest=/etc/apache2/sites-enabled/mpr-monitor.conf owner=root group=root mode=0644
+  
+- name: configure nginx (mpr monitor server)
+  tags: [apps]
+  template: src=nginx_mprmonitor.j2 dest=/etc/nginx/sites-enabled/mprmonitor owner=root group=root mode=0644
+  
+- name: restart apache2
+  service: name=apache2 state=restarted  
+
+- name: restart nginx
+  service: name=nginx state=restarted
