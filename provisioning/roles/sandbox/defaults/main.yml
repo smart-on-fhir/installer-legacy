@@ -2,13 +2,12 @@
 username: fhir
 install_dir: "/home/{{username}}"
 java_home_dir: "/usr/lib/jvm/java-7-oracle"
-smart_on_fhir_version: "0.0.5"
 diabetes_monograph_repo: "https://github.com/smart-on-fhir/diabetes-monograph-app.git"
-diabetes_monograph_branch: "v{{smart_on_fhir_version}}"
+diabetes_monograph_branch: "master"
 disease_monograph_repo: "https://github.com/smart-on-fhir/disease-monograph-app.git"
-disease_monograph_branch: "v{{smart_on_fhir_version}}"
+disease_monograph_branch: "master"
 mpr_monitor_repo: "https://github.com/smart-on-fhir/mpr-monitor-app.git"
-mpr_monitor_branch: "v{{smart_on_fhir_version}}"
+mpr_monitor_branch: "master"
 mpr_monitor_server_host: "localhost"
 mpr_monitor_server_port: 8000
 mpr_monitor_secure_http: false
