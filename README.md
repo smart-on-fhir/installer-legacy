@@ -1,4 +1,6 @@
 ## Get started with one line, using Vagrant
+![SMART Logo](smart-logo.png)
+
 
 The three prerequisites, which are available on Mac, Windows, and Linux 
 are (we have tested with the versions below, but other versions may be fine too):
