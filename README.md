@@ -100,3 +100,5 @@ By [default](provisioning/roles/common/defaults/main.yml#L103), the server will 
 
 * `sample_patients_limit: 100`
 
+### DSTU2
+See note `Vagrantfile` if you are interested in building a DSTU2 sandbox
