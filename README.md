@@ -20,7 +20,13 @@ Vagrant)" section in this document.
 upon checkout which is going to mess up the install. You will need to make sure that this
 conversion is disabled by running `git config --global core.autocrlf false`
 
-Once you have Virtualbox and Vagrant installed on your machine, you can:
+*Note:* The Ansible requirement is a Python package that installs some console tools. The latest version will not work. If you have the *pip* Python package manager installed, the easiest way to install the correct version of Ansible is to run the following:
+
+```
+sudo pip install ansible==1.6.1
+```
+
+Once you have the prerequisites installed on your machine, you can:
 
 ```
 vagrant plugin install vagrant-vbguest
