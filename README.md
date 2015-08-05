@@ -23,7 +23,7 @@ conversion is disabled by running `git config --global core.autocrlf false`
 *Note:* The Ansible requirement is a Python package that installs some console tools. The latest version will not work. If you have the *pip* Python package manager installed, the easiest way to install the correct version of Ansible is to run the following:
 
 ```
-sudo pip install ansible==1.6.1
+sudo pip install ansible==1.8.2
 ```
 
 Once you have the prerequisites installed on your machine, you can:
