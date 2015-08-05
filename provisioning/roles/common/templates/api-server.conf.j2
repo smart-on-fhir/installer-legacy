@@ -20,6 +20,7 @@ env TOKEN_URI={{fhir_server_token_uri|default('')}}
 env CLIENT_ID={{fhir_server_client|default('')}}
 env CLIENT_SECRET={{fhir_server_password|default('')}}
 env AUTH_CLIENT_ID={{auth_server_client|default('')}}
+env TOKEN_CACHE_SPEC="maximumSize=1000,expireAfterWrite={{token_cache_duration}}"
 env AUTH_CLIENT_SECRET={{auth_server_password|default('')}}
 env JAVA_HOME={{java_home_dir}}
 
