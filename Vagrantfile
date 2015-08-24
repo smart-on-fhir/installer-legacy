@@ -24,6 +24,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #  config.vm.network :forwarded_port, guest: 9999, host: 9999
   config.vm.network "private_network", ip: "192.168.50.4"
   
+  config.vm.provision "fix-no-tty", type: "shell" do |s|
+    s.privileged = false
+    s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
+  end
+  
   config.vm.provision "shell", path: "provisioning/fetch-templates.sh", args: ["/vagrant/provisioning/roles/common/templates/config","v0.0.5"]
 
   config.vm.provision "ansible" do |ansible|
