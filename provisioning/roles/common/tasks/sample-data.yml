@@ -11,7 +11,7 @@
   tags: [patients]
   sudo_user: "{{username}}"
   shell: chdir={{install_dir}}/sample-patients/bin
-         python generate.py --write-fhir ../generated-data
+         python generate.py --write-fhir ../generated-data {{sample_patients_generator_params}} 
 
 - name: list sample patients
   tags: [patients, load_patients]

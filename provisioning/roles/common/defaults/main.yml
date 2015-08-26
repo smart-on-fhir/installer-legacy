@@ -153,3 +153,6 @@ app_server_base: "{{
 fhir_server_base: "{{
         'https' if fhir_server_secure_http else 'http'}}://{{fhir_server_host}}{{
         (':'+fhir_server_port|string) if fhir_server_port|int not in (80,443) else ''}}"
+
+# Additional parameters for the sample patient generator
+sample_patients_generator_params: "{{('--base-url ' + fhir_server_base) if sample_patients_branch == 'dstu2-wip' else ''}}"
