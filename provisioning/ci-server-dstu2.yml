@@ -1,0 +1,31 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    use_custom_ssl_certificates: true
+    custom_ssl_certificates_path: ../../private/fhir_ci_certs
+    auth_server_secure_http: true
+    auth_server_host: "ci-auth.fhir.me"
+    auth_server_port: "443"
+    auth_server_preserve_db: true
+    fhir_server_secure_http: true
+    fhir_server_host: "ci-api.fhir.me"
+    fhir_server_port: "443"
+    fhir_server_preserve_db: true
+    app_server_secure_http: true
+    app_server_host: "ci.fhir.me"
+    app_server_port: "443"
+    include_custom_patients: true
+    fhir_server_branch: "dstu2-wip"
+    sample_patients_branch: "dstu2-wip"
+    auth_ldap_server_branch: "smart-launch"
+    auth_server_branch: "smart-launch-dstu2"
+    fhir_starter_branch: "dstu2-wip"
+    cardiac_risk_branch: "dstu2-wip"
+    bp_centiles_branch: "dstu2-wip"
+    growth_chart_branch: "dstu2-wip"
+    fhir_demo_app_branch: "dstu2-wip"
+
+  roles:
+    - common
+    - ldap
