@@ -239,21 +239,20 @@ angular.module('fhirStarter').factory('patientSearch', function($route, $routePa
 
     search: function(p){
       d = $q.defer();
+      q = {$sort: [['given','asc'],['family','asc']], _count:25};
       if (!smart){
         d.resolve([]);
         return d.promise;
       };
-      smart.api.Patient.where
-      .nameAll(p.tokens)
-      ._count(25)
-      ._sortAsc("family")
-      ._sortAsc("given")
-      .search()
-      .done(function(r, search){
-        currentSearch = search;
+      if(p.tokens && p.tokens.length > 0) {
+        q['name'] = p.tokens[0];
+      }
+      smart.api.search({type: 'Patient', query: q})
+      .done(function(r){
+        currentSearch = r.data;
         atPage = 0;
-        pages = [r];
-        d.resolve(r)
+        pages = [currentSearch.entry.map(function(entry){return entry.resource;})];
+        d.resolve(pages[0]);
         $rootScope.$digest();
       }).fail(function(){
         $rootScope.$emit('reconnect-request');
@@ -268,7 +267,7 @@ angular.module('fhirStarter').factory('patientSearch', function($route, $routePa
     
     hasNext: function(p){
       if (currentSearch) {
-         if (currentSearch.hasNext()) {
+         if (currentSearch.link.find(function(e){return e.relation==='next';})) {
             return true;
          } else {
             return pages.length > atPage + 1;
@@ -291,10 +290,12 @@ angular.module('fhirStarter').factory('patientSearch', function($route, $routePa
       if (pages.length > atPage) {
         d.resolve(pages[atPage]);
       } else {
-
-        currentSearch.next().done(function(r){
-          pages.push(r);
-          d.resolve(r);
+        smart.api.nextPage({bundle: currentSearch})
+        .done(function(r){
+          currentSearch = r.data;
+          data = currentSearch.entry.map(function(entry){return entry.resource;});
+          pages.push([data]);
+          d.resolve(data);
           $rootScope.$digest();
         }).fail(function(){
             $rootScope.$emit('reconnect-request');
@@ -311,13 +312,16 @@ angular.module('fhirStarter').factory('patientSearch', function($route, $routePa
       // If it's already in our resource cache, return it.
       // Otherwise fetch a new copy and return that.
       d = $q.defer();
+      /*
+      // TO DO: implement this with fhir.js
       var p = smart.cache.get({resource:'Patient', id:pid});
       if (p !== null) {
         d.resolve(p);
         return d.promise;
       }
-      smart.api.Patient.read(pid).done(function(p){
-        d.resolve(p);
+      */
+      smart.api.read({type:"Patient", id:pid}).done(function(p){
+        d.resolve(p.data);
         $rootScope.$digest();
       }).fail(function(){
         $rootScope.$emit('reconnect-request');
@@ -352,7 +356,7 @@ angular.module('fhirStarter').factory('random', function() {
 angular.module('fhirStarter').factory('patient', function() {
   return {
     id: function(p){
-      return p.resourceId;
+      return p.id;
     },
     name: function(p){
       var name = p && p.name && p.name[0];
