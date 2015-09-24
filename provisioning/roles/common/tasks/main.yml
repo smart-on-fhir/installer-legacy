@@ -17,6 +17,7 @@
     DEBIAN_FRONTEND: noninteractive
   apt: pkg={{item}} force=yes
   with_items:
+         - aptitude
          - git
          - nginx
          - maven
