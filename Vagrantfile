@@ -29,15 +29,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
   end
   
-  config.vm.provision "shell", path: "provisioning/fetch-templates.sh", args: ["/vagrant/provisioning/roles/common/templates/config","v0.0.5"]
+  config.vm.provision "shell", path: "provisioning/fetch-templates.sh", args: ["/vagrant/provisioning/roles/common/templates/config","v0.1.0"]
 
   config.vm.provision "ansible" do |ansible|
     #ansible.verbose = "vvvv"
-    #ansible.tags=["load_apps"]
+    #ansible.tags=["apps"]
     
-    # Use the second line in place of the first for DSTU2 builds
     ansible.playbook = "provisioning/smart-on-fhir-servers.yml"
-    #ansible.playbook = "provisioning/smart-on-fhir-servers-dstu2.yml"
   end
 
 end

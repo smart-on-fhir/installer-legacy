@@ -1,8 +1,0 @@
----
-- hosts: all
-  sudo: yes
-  vars_files:
-    - custom_settings-dstu2.yml
-  roles:
-    - common
-    - ldap
