@@ -68,6 +68,16 @@
        version={{diabetes_monograph_branch}}
        dest={{install_dir}}/apps/static/apps/diabetes-monograph
        update={{update_repositories}}
+       
+- name: configure sample apps
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/node_modules\/fhirclient\/fhir-client\.js/\.\.\/\.\.\/js\/fhir-client\.js/' {{install_dir}}/apps/static/apps/{{item}}
+  with_items:
+        - diabetes-monograph/index.html
+        - diabetes-monograph/launch.html
+        - disease-monograph/index.html
+        - disease-monograph/launch.html
   
 - name: checkout mpr monitor app
   tags: [apps]
