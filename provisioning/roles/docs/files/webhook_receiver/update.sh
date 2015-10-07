@@ -7,7 +7,7 @@ for v in $(git for-each-ref refs/remotes/origin --format="%(refname:short)" |
 	grep -v HEAD && 
 	git tag);
 do
-	git checkout origin/$v;
+	git checkout $v;
 	echo "baseurl: /$v/" > /tmp/_config-$v.yml;
 	jekyll build --source . \
                      --destination ../static/$v \
