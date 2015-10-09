@@ -106,5 +106,28 @@ By [default](provisioning/roles/common/defaults/main.yml#L103), the server will 
 
 * `sample_patients_limit: 100`
 
-### DSTU2
-See note `Vagrantfile` if you are interested in building a DSTU2 sandbox
+### SMART on FHIR Versions
+
+#### SMART on FHIR 0.1.0 / FHIR 1.0.1 (DSTU2)
+
+API Server: v0.1.0
+Auth Server: f0.1.0
+Auth LDAP Overlay: f0.1.0
+Sample Patients: v0.1.0
+FHIR Starter: v0.1.0
+Cardiac Risk App: v0.1.0
+BP Centiles App: v0.1.0
+Growth Chart App: v0.1.0
+FHIR Demo App: v0.1.0
+
+#### SMART on FHIR 0.0.5 / FHIR 0.0.82 (DSTU1)
+
+API Server: v0.0.5
+Auth Server: f0.0.5
+Auth LDAP Overlay: f0.0.4
+Sample Patients: v0.0.5
+FHIR Starter: v0.0.5
+Cardiac Risk App: v0.0.5
+BP Centiles App: v0.0.5
+Growth Chart App: v0.0.5
+FHIR Demo App: v0.0.5
