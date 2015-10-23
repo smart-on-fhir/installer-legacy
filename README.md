@@ -77,7 +77,7 @@ to some world-routable hostname if that's what you need -- and set the
 app_server public port to 80.
 
 ```
-ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml 
+sudo ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml 
 ```
 
 ---
