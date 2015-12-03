@@ -2,17 +2,35 @@
 username: fhir
 install_dir: "/home/{{username}}"
 java_home_dir: "/usr/lib/jvm/java-7-oracle"
-diabetes_monograph_repo: "https://github.com/smart-on-fhir/diabetes-monograph-app.git"
-diabetes_monograph_branch: "master"
-disease_monograph_repo: "https://github.com/smart-on-fhir/disease-monograph-app.git"
-disease_monograph_branch: "master"
-mpr_monitor_repo: "https://github.com/smart-on-fhir/mpr-monitor-app.git"
-mpr_monitor_branch: "master"
-mpr_monitor_server_host: "localhost"
-mpr_monitor_server_port: 8000
-mpr_monitor_secure_http: false
-mpr_monitor_base: "{{
-    'https' if mpr_monitor_secure_http else 'http' }}://{{mpr_monitor_server_host}}{{(
-    ':'+mpr_monitor_server_port|string) if mpr_monitor_server_port|int not in (80,443) else ''}}"
-mpr_monitor_client_id: "my_web_app"
 update_repositories: yes
+http_redirect: true
+mpr_monitor_host: "localhost"
+mpr_monitor_port: 8000
+mpr_monitor_secure_http: false
+demo_apps_server_secure_http: false
+demo_apps_server_host: "localhost"
+demo_apps_server_port: 9095
+mpr_monitor_base: "{{
+    'https' if mpr_monitor_secure_http else 'http' }}://{{mpr_monitor_host}}{{(
+    ':'+mpr_monitor_port|string) if mpr_monitor_port|int not in (80,443) else ''}}"
+demo_apps_server_base: "{{
+        'https' if demo_apps_server_secure_http else 'http'}}://{{demo_apps_server_host}}{{
+        (':'+demo_apps_server_port|string) if demo_apps_server_host|int not in (80,443) else ''}}"
+mpr_monitor_repo: "https://github.com/smart-on-fhir/mpr-monitor-app.git"
+cardiac_risk_repo: "https://github.com/smart-on-fhir/cardiac-risk-app.git"
+bp_centiles_repo: "https://github.com/smart-on-fhir/bp-centiles-app.git"
+growth_chart_repo: "https://github.com/smart-on-fhir/growth-chart-app.git"
+diabetes_monograph_repo: "https://github.com/smart-on-fhir/diabetes-monograph-app"
+disease_monograph_repo: "https://github.com/smart-on-fhir/diabetes-monograph-app"
+mpr_monitor_branch: "master"
+cardiac_risk_branch: "master"
+bp_centiles_branch: "master"
+growth_chart_branch: "master"
+diabetes_monograph_branch: "master"
+disease_monograph_branch: "master"
+cardiac_risk_client_id: "c9d9f64a-0ff1-4438-873d-d6692e4fee76"
+bp_centiles_client_id: "aeb58d25-8154-4947-9d3e-d8ef092a022c"
+growth_chart_client_id: "9c89418e-faa1-40ab-86c9-4c9f23584907"
+diabetes_monograph_client_id: "ded7a5b7-5f0c-4cb8-928c-000fbda096a2"
+disease_monograph_client_id: "47872bf2-a783-4197-93df-1237af5ff48e"
+mpr_monitor_client_id: "2b47cbe2-3857-4aed-af59-a90ae8325899"

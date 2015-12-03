@@ -51,70 +51,9 @@
 - name: wait for auth server to become available
   tags: [auth]
   when: auth_config_1.changed or auth_config_2.changed
-  wait_for: port=4000
-  
-- name: checkout disease monograph app
-  tags: [apps]
-  sudo_user: "{{username}}"
-  git: repo={{disease_monograph_repo}}
-       version={{disease_monograph_branch}}
-       dest={{install_dir}}/apps/static/apps/disease-monograph
-       update={{update_repositories}}
-
-- name: checkout diabetes monograph app
-  tags: [apps]
-  sudo_user: "{{username}}"
-  git: repo={{diabetes_monograph_repo}}
-       version={{diabetes_monograph_branch}}
-       dest={{install_dir}}/apps/static/apps/diabetes-monograph
-       update={{update_repositories}}
-       
-- name: configure sample apps
-  tags: [apps]
-  sudo_user: "{{username}}"
-  shell: sed -i -e 's/node_modules\/fhirclient\/fhir-client\.js/\.\.\/\.\.\/js\/fhir-client\.js/' {{install_dir}}/apps/static/apps/{{item}}
-  with_items:
-        - diabetes-monograph/index.html
-        - diabetes-monograph/launch.html
-        - disease-monograph/index.html
-        - disease-monograph/launch.html
-  
-- name: checkout mpr monitor app
-  tags: [apps]
-  sudo_user: "{{username}}"
-  git: repo={{mpr_monitor_repo}}
-       version={{mpr_monitor_branch}}
-       dest={{install_dir}}/apps/rest/mpr_monitor
-       update={{update_repositories}}
-
-- name: configure mpr monitor (step 1)
-  tags: [apps]
-  sudo_user: "{{username}}"
-  shell: sed -i -e 's/my_web_app/{{ mpr_monitor_client_id | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
-  
-- name: configure mpr monitor (step 2)
-  tags: [apps]
-  sudo_user: "{{username}}"
-  shell: sed -i -e 's/http:\/\/localhost:8000/{{ mpr_monitor_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
-  
-- name: install pip prerequisites to mpr monitor
-  tags: [apps]
-  pip: requirements={{install_dir}}/apps/rest/mpr_monitor/requirements.txt
-
-- name: configure apache (remove default server)
-  tags: [apps]
-  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
-  
-- name: configure apache (mpr monitor server)
-  tags: [apps]
-  template: src=mpr-monitor.conf.j2 dest=/etc/apache2/sites-enabled/mpr-monitor.conf owner=root group=root mode=0644
-  
-- name: configure nginx (mpr monitor server)
-  tags: [apps]
-  template: src=nginx_mprmonitor.j2 dest=/etc/nginx/sites-enabled/mprmonitor owner=root group=root mode=0644
-  
-- name: restart apache2
-  service: name=apache2 state=restarted  
+  wait_for: port=4000 
 
 - name: restart nginx
   service: name=nginx state=restarted
+
+- include: apps.yml
