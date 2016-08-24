@@ -1,0 +1,8 @@
+# Use LF by default, also on Windows machines
+text eol=lf
+
+# To make sure, define these ones explicitly
+*.js text eol=lf
+*.j2 text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
