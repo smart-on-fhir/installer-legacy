@@ -18,7 +18,8 @@ Vagrant)" section in this document.
 
 *Note:* The default installation of GIT on Windows enables a LF to CRLF conversion
 upon checkout which is going to mess up the install. You will need to make sure that this
-conversion is disabled by running `git config --global core.autocrlf false`
+conversion is disabled by running `git config core.autocrlf false` in the root directory of the
+repository.
 
 *Note:* The Ansible requirement is a Python package that installs some console tools. The latest version will not work. If you have the *pip* Python package manager installed, the easiest way to install the correct version of Ansible is to run the following:
 
