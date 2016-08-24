@@ -6,10 +6,10 @@ upstream mpr-monitor {
 server {
 
 {% if app_server_host %}
-    server_name {{mpr_monitor_server_host}};
+    server_name {{mpr_monitor_host}};
 {% endif %}
 
-    listen {{mpr_monitor_server_port}};
+    listen {{mpr_monitor_port}};
 
     location / {
       proxy_set_header X-Real-IP $remote_addr;
@@ -30,9 +30,9 @@ server {
 {% endif %}
 }
 
-{% if mpr_monitor_server_port == 443 %}
+{% if mpr_monitor_port == 443 %}
 server {
-    server_name {{mpr_monitor_server_host}};
+    server_name {{mpr_monitor_host}};
     rewrite ^       {{mpr_monitor_base}}$request_uri? permanent;
     listen 80;
 }

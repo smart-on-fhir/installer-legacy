@@ -13,7 +13,7 @@ are (we have tested with the versions below, but other versions may be fine too)
 please use the version of the installer in the "ansible-guest" branch which runs Ansible on the 
 guest machine instead of using the one on the host OS. To switch the branch, execute
 `git checkout ansible-guest` before running `vagrant up`. Another options is to follow the
-instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without
+instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 Server machine (without
 Vagrant)" section in this document.
 
 *Note:* The default installation of GIT on Windows enables a LF to CRLF conversion
@@ -61,7 +61,7 @@ vagrant halt
 
 ---
 
-## Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without Vagrant)
+## Building SMART-on-FHIR on fresh Ubuntu 14.04 Server machine (without Vagrant)
 
 ```
 sudo apt-get update
