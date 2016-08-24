@@ -3,6 +3,24 @@
 
 VAGRANTFILE_API_VERSION = "2"
 
+module OS
+    def OS.windows?
+        (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.mac?
+        (/darwin/ =~ RUBY_PLATFORM) != nil
+    end
+
+    def OS.unix?
+        !OS.windows?
+    end
+
+    def OS.linux?
+        OS.unix? and not OS.mac?
+    end
+end
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.hostname = "smart-on-fhir"
@@ -31,12 +49,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.provision "shell", path: "provisioning/fetch-templates.sh", args: ["/vagrant/provisioning/roles/common/templates/config","v0.1.0"]
 
-  config.vm.provision "shell", path: "provision.sh"
-  
-  #config.vm.provision "ansible" do |ansible|
-    #ansible.verbose = "vvvv"
-    #ansible.tags=["apps"]
-    #ansible.playbook = "provisioning/smart-on-fhir-servers.yml"
-  #end
+  if OS.windows? then
+    config.vm.provision "shell", path: "provision.sh"
+  else
+    config.vm.provision "ansible" do |ansible|
+      #ansible.verbose = "vvvv"
+      #ansible.tags=["apps"]
+      ansible.playbook = "provisioning/smart-on-fhir-servers.yml"
+    end
+  end
 
 end
