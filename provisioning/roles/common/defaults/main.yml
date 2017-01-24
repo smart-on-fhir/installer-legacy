@@ -29,7 +29,7 @@ java_home_dir: "/usr/lib/jvm/java-7-oracle"
 # Database user configuration (used by the SMART-on-FHIR server)
 postgres_user: "fhir"
 postgres_password: "fhir"
-
+postgresql_version: "9.5"
 # Password for the Java keystore used by the authorization server (please change)
 keystore_password: "changeme"
 
