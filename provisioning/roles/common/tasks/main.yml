@@ -1,3 +1,9 @@
+- name: check service manager for systemd
+  stat:
+    path: /usr/lib/systemd
+  register: systemdPath
+  ignore_errors: True
+
 - name: check host:port uniqueness
   tags: [general]
   fail: msg="each server must have unique host:port assigned"

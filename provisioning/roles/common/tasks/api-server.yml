@@ -17,12 +17,19 @@
           password={{postgres_password}}
           role_attr_flags=SUPERUSER
           
-- name: configure api server service
+- name: configure api server service(Upstart)
   tags: [smart_on_fhir, reset_db]
   template: src=api-server.conf.j2
             dest=/etc/init/api-server.conf
             owner=root group=root mode=0644
   register: sof_service
+  when: systemdPath.stat.isdir is not defined
+
+- name: configure api server service(systemd)
+  tags: [smart_on_fhir, reset_db]
+  template: src=api-server.service.j2
+            dest=/lib/systemd/system/api-server.service
+  when: systemdPath.stat.isdir is defined and systemdPath.stat.isdir
 
 - name: checkout api server
   tags: [smart_on_fhir, reset_db]
