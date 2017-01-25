@@ -1,9 +1,16 @@
-- name: configure auth server service
+- name: configure auth server service(Upstart)
   tags: [auth]
   template: src=auth-server.conf.j2
             dest=/etc/init/auth-server.conf
             owner=root group=root mode=0644
   register: auth_service
+  when: systemdPath.stat.isdir is not defined
+
+- name: configure auth server service(systemd)
+  tags: [smart_on_fhir, reset_db]
+  template: src=auth-server.service.j2
+            dest=/lib/systemd/system/auth-server.service
+  when: systemdPath.stat.isdir is defined and systemdPath.stat.isdir
 
 - name: checkout auth server
   tags: [auth]

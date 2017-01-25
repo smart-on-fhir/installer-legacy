@@ -1,0 +1,25 @@
+[Unit]
+Description=Job that starts the SmartOnFhir Api-Server
+Documentation=man:foo(1)
+
+[Service]
+User={{username}}
+Environment=BASE_URL={{fhir_server_base}}
+Environment=AUTH={{fhir_server_use_auth|default('false')}}
+Environment=INTROSPECTION_URI={{fhir_server_introspection_uri|default('')}}
+Environment=REGISTER_URI={{fhir_server_register_uri|default('')}}
+Environment=AUTHORIZE_URI={{fhir_server_authorize_uri|default('')}}
+Environment=TOKEN_URI={{fhir_server_token_uri|default('')}}
+Environment=CLIENT_ID={{fhir_server_client|default('')}}
+Environment=CLIENT_SECRET={{fhir_server_password|default('')}}
+Environment=AUTH_CLIENT_ID={{auth_server_client|default('')}}
+Environment=TOKEN_CACHE_SPEC="maximumSize=1000,expireAfterWrite={{token_cache_duration}}"
+Environment=AUTH_CLIENT_SECRET={{auth_server_password|default('')}}
+Environment=JAVA_HOME={{java_home_dir}}
+WorkingDirectory={{install_dir}}/api-server/target
+ExecStart=/usr/bin/java -Djetty.port="3000" -Djetty.host="localhost" {% if auth_server_secure_http and not use_custom_ssl_certificates %} -Djavax.net.ssl.trustStore="{{install_dir}}/keystore" -Djavax.net.ssl.trustStorePassword="{{keystore_password}}" {% endif %} -jar /home/fhir/jetty-runner.jar --config /home/fhir/jetty.xml fhir-0.1.war
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,15 @@
+[Unit]
+Description=Job that starts the SmartOnFhir Api-Server
+Documentation=man:foo(1)
+
+[Service]
+User={{username}}
+WorkingDirectory={{install_dir}}
+ExecStart=/usr/bin/java -DBASE_URL="{{auth_server_base}}/"-DCONTEXT_FHIR_ENDPOINT="{{fhir_server_base}}" -DCONTEXT_RESOLVE_ENDPOINT="{{app_server_base}}" -DCONTEXT_USERNAME="{{fhir_server_client}}" -DCONTEXT_PASSWORD="{{fhir_server_password}}" -Dldap.server="{{ldap_server_uri}}" -Dldap.url="{{ldap_server_uri}}" -Dldap.base="ou=People,{{ldap_server_base}}" -Djetty.port="4000" -Djetty.host="localhost"{% if ldap_server_tls or fhir_server_secure_http %} -Djavax.net.ssl.trustStore="{{install_dir}}/keystore" -Djavax.net.ssl.trustStorePassword="{{keystore_password}}" {% endif %} -jar jetty-runner.jar --config {{install_dir}}/jetty.xml {{auth_server_war}}
+
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
