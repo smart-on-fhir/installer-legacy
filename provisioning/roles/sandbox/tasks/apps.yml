@@ -1,0 +1,130 @@
+- name: checkout mpr monitor app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{mpr_monitor_repo}}
+       version={{mpr_monitor_branch}}
+       dest={{install_dir}}/apps/rest/mpr_monitor
+       update={{update_repositories}}
+
+- name: configure mpr monitor (step 1)
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/my_web_app/{{ mpr_monitor_client_id | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
+  
+- name: configure mpr monitor (step 2)
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/http:\/\/localhost:8000/{{ mpr_monitor_base | regex_replace('/', '\\/') }}/' {{install_dir}}/apps/rest/mpr_monitor/settings.py
+  
+- name: install pip prerequisites to mpr monitor
+  tags: [apps]
+  pip: requirements={{install_dir}}/apps/rest/mpr_monitor/requirements.txt
+
+- name: configure apache (remove default server)
+  tags: [apps]
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  
+- name: configure apache (mpr monitor server)
+  tags: [apps]
+  template: src=mpr-monitor.conf.j2 dest=/etc/apache2/sites-enabled/mpr-monitor.conf owner=root group=root mode=0644
+  
+- name: configure nginx (mpr monitor server)
+  tags: [apps]
+  template: src=nginx_mprmonitor.j2 dest=/etc/nginx/sites-enabled/mprmonitor owner=root group=root mode=0644
+  
+- name: restart apache2
+  service: name=apache2 state=restarted 
+
+- name: checkout disease monograph app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{disease_monograph_repo}}
+       version={{disease_monograph_branch}}
+       dest={{install_dir}}/demo-apps/disease-monograph
+       update={{update_repositories}}
+
+- name: checkout diabetes monograph app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{diabetes_monograph_repo}}
+       version={{diabetes_monograph_branch}}
+       dest={{install_dir}}/demo-apps/diabetes-monograph
+       update={{update_repositories}}
+
+- name: checkout cardiac risk app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{cardiac_risk_repo}}
+       version={{cardiac_risk_branch}}
+       dest={{install_dir}}/demo-apps/cardiac-risk
+       update={{update_repositories}}
+       
+- name: checkout bp centiles app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{bp_centiles_repo}}
+       version={{bp_centiles_branch}}
+       dest={{install_dir}}/demo-apps/bp-centiles
+       update={{update_repositories}}
+
+- name: checkout growth chart app
+  tags: [apps]
+  sudo_user: "{{username}}"
+  git: repo={{growth_chart_repo}}
+       version={{growth_chart_branch}}
+       dest={{install_dir}}/demo-apps/growth-chart
+       update={{update_repositories}}
+
+- name: configure demo apps
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/node_modules\/fhirclient\/fhir-client\.js/\.\.\/js\/fhir-client\.js/' {{install_dir}}/demo-apps/{{item}}
+  with_items:
+        - bp-centiles/index.html
+        - bp-centiles/launch.html
+        - cardiac-risk/index.html
+        - cardiac-risk/launch.html
+        - growth-chart/index.html
+        - growth-chart/launch.html
+        - diabetes-monograph/index.html
+        - diabetes-monograph/launch.html
+        - disease-monograph/index.html
+        - disease-monograph/launch.html
+        
+- name: configure BP Centiles client ID
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/bp_centiles/{{bp_centiles_client_id}}/' {{install_dir}}/demo-apps/bp-centiles/launch.html
+
+- name: configure Cardiac Risk client ID
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/cardiac_risk/{{cardiac_risk_client_id}}/' {{install_dir}}/demo-apps/cardiac-risk/launch.html
+
+- name: configure Growth Chart client ID
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/growth_chart/{{growth_chart_client_id}}/' {{install_dir}}/demo-apps/growth-chart/launch.html
+
+- name: configure Diabetes Monograph client ID
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/diabetes_monograph/{{diabetes_monograph_client_id}}/' {{install_dir}}/demo-apps/diabetes-monograph/launch.html
+
+- name: configure Disease Monograph client ID
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: sed -i -e 's/disease_monograph/{{disease_monograph_client_id}}/' {{install_dir}}/demo-apps/disease-monograph/launch.html
+
+- name: copy JS client from FHIR Starter
+  tags: [apps]
+  sudo_user: "{{username}}"
+  shell: chdir={{install_dir}}/demo-apps
+         mkdir js; cp {{install_dir}}/apps/static/js/fhir-client.js js/.
+ 
+- name: configure nginx (demo apps)
+  tags: [apps,nginx]
+  template: src=nginx_demo_apps.j2 dest=/etc/nginx/sites-enabled/demo-apps owner=root group=root mode=0644
+
+- name: restart nginx
+  service: name=nginx state=restarted

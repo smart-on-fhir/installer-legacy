@@ -13,7 +13,7 @@ are (we have tested with the versions below, but other versions may be fine too)
 please use the version of the installer in the "ansible-guest" branch which runs Ansible on the 
 guest machine instead of using the one on the host OS. To switch the branch, execute
 `git checkout ansible-guest` before running `vagrant up`. Another options is to follow the
-instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without
+instructions in the "Building SMART-on-FHIR on fresh Ubuntu 14.04 Server machine (without
 Vagrant)" section in this document.
 
 *Note:* The default installation of GIT on Windows enables a LF to CRLF conversion
@@ -61,7 +61,7 @@ vagrant halt
 
 ---
 
-## Building SMART-on-FHIR on fresh Ubuntu 14.04 machine (without Vagrant)
+## Building SMART-on-FHIR on fresh Ubuntu 14.04 Server machine (without Vagrant)
 
 ```
 sudo apt-get update
@@ -77,7 +77,7 @@ to some world-routable hostname if that's what you need -- and set the
 app_server public port to 80.
 
 ```
-ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml 
+sudo ansible-playbook  -c local -i 'localhost,' -vvvv smart-on-fhir-servers.yml 
 ```
 
 ---
@@ -106,5 +106,28 @@ By [default](provisioning/roles/common/defaults/main.yml#L103), the server will 
 
 * `sample_patients_limit: 100`
 
-### DSTU2
-See note `Vagrantfile` if you are interested in building a DSTU2 sandbox
+### SMART on FHIR Versions
+
+#### SMART on FHIR 0.1.0 / FHIR 1.0.1 (DSTU2)
+
+* API Server: v0.1.0
+* Auth Server: f0.1.0
+* Auth LDAP Overlay: f0.1.0
+* Sample Patients: v0.1.0
+* FHIR Starter: v0.1.0
+* Cardiac Risk App: v0.1.0
+* BP Centiles App: v0.1.0
+* Growth Chart App: v0.1.0
+* FHIR Demo App: v0.1.0
+
+#### SMART on FHIR 0.0.5 / FHIR 0.0.82 (DSTU1)
+
+* API Server: v0.0.5
+* Auth Server: f0.0.5
+* Auth LDAP Overlay: f0.0.4
+* Sample Patients: v0.0.5
+* FHIR Starter: v0.0.5
+* Cardiac Risk App: v0.0.5
+* BP Centiles App: v0.0.5
+* Growth Chart App: v0.0.5
+* FHIR Demo App: v0.0.5
